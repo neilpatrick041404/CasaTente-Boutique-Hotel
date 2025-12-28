@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    try {
+      const user = JSON.parse(localStorage.getItem("user") || "null");
+      if (user) {
+        if (user.role === "admin") {
+          window.location.replace("/admin-page");
+        } else {
+          window.location.replace("/home-page");
+        }
+      }
+    } catch (err) {
+      // parsing error — do nothing and show login page
+      console.error("Failed parsing stored user:", err);
+    }
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casa Tente Hotel | Login</title>
+  <link rel="stylesheet" href="css/login.css" />
+  <style>
+    /* ====== POPUP ANIMATION ====== */
+    @keyframes popupFadeIn {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -60%) scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    @keyframes popupShake {
+      0%, 100% { transform: translate(-50%, -50%) translateX(0); }
+      20%, 60% { transform: translate(-50%, -50%) translateX(-10px); }
+      40%, 80% { transform: translate(-50%, -50%) translateX(10px); }
+    }
+
+    .popup.show {
+      animation: popupFadeIn 0.3s ease forwards;
+    }
+
+    .popup.error.shake {
+      animation: popupShake 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+
+  <div class="login-box">
+
+    <!-- 🏨 OVAL LOGO (matches homepage style) -->
+    <a href="/home-page" class="oval-logo">
+      <img src="images/casa-tente-logo.png" alt="CasaTente Boutique Hotel" class="logo-img" />
+      <div class="logo-text">
+        <h1>CasaTente</h1>
+        <p>Boutique Hotel</p>
+      </div>
+    </a>
+
+    <h2>Sign in to your account</h2>
+
+    <form id="loginForm">
+      <label>Email address</label>
+      <input id="email" type="email" placeholder="Enter your email address" required />
+
+      <label>Password</label>
+      <input id="password" type="password" placeholder="Enter your password" required />
+
+      <button type="submit">LOG IN</button>
+
+      <p class="forgot"><a href="/forgot-password-page">Forgot Password?</a></p>
+    </form>
+
+    <div class="divider"></div>
+
+    <p class="terms">
+      By signing in or creating an account, you agree with our<br />
+      <a href="#">Terms & Conditions</a> and
+      <a href="#">Privacy Statements</a>.
+    </p>
+
+    <p style="text-align:center; margin-top:1rem;">
+      Don't have an account? <a href="/signup-page">Sign up here</a>
+    </p>
+
+    <p class="footer">&copy; 2025 CasaTenteHotel.com</p>
+  </div>
+
+  <!-- ✅ Custom Popup -->
+  <div id="popup" class="popup">
+    <h3 id="popupTitle"></h3>
+    <p id="popupMessage"></p>
+    <button id="popupCloseBtn">OK</button>
+  </div>
+
+  <!-- Link to JS -->
+  <script src="js/login.js" defer></script>
+</body>
+</html>

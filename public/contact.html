@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Casa Tente Boutique Hotel</title>
+
+  <!-- STYLES -->
+  <link rel="stylesheet" href="css/contact.css" />
+  <script src="https://kit.fontawesome.com/a2e0f1f6e5.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="logo">CasaTente Boutique Hotel</div>
+    <nav>
+      <ul>
+        <li><a href="/home-page">Home</a></li>
+        <li><a href="/rooms-page">Rooms</a></li>
+        <li><a href="/amenities-page">Amenities</a></li>
+        <li><a href="/about-page">About</a></li>
+        <li><a href="/contact-page" class="active">Contact</a></li>
+        <li class="profile-wrapper">
+          <div id="profileAvatar" class="avatar-circle">
+            <svg class="avatar-svg" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div id="profileDropdown" class="profile-dropdown">
+            <a href="#" id="profileLink">Profile</a>
+            <a href="#" id="historyLink">History</a>
+            <a href="#" id="logoutProfileBtn">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== CONTACT SECTION ===== -->
+  <section class="contact-section">
+    <div class="contact-container">
+      <h2>Get in Touch</h2>
+      <p>
+        We’d love to hear from you! Whether you’re planning a stay or simply want to know more about us, 
+        feel free to reach out using any of the options below. (For cancellation of reservation, please use the contact options below)
+      </p>
+      <div class="contact-info" id="contactInfo"></div>
+    </div>
+
+    <div class="contact-container location">
+      <h2>Visit Us</h2>
+      <p>
+        📍 Barangay Culasi, Matnog, Sorsogon, Philippines  
+        <br>We’re located near the scenic coastal area — perfect for relaxation and nature lovers.
+      </p>
+    </div>
+
+    <div class="feedback-section">
+      <h2>We Value Your Feedback</h2>
+      <p>Your opinion helps us improve our hospitality and guest experience.</p>
+      <a href="#" id="feedbackButton" class="feedback-btn">Leave Feedback</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Casa Tente Boutique Hotel | Matnog, Sorsogon</p>
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script src="js/contact.js"></script>
+  <script src="js/auth-check.js"></script>
+</body>
+</html>

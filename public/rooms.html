@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casa Tente Boutique Hotel | Rooms</title>
+  <link rel="stylesheet" href="css/rooms.css" />
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="logo">CasaTente Boutique Hotel</div>
+    <nav>
+      <ul>
+        <li><a href="/home-page">Home</a></li>
+        <li><a href="/rooms-page" class="active">Rooms</a></li>
+        <li><a href="/amenities-page">Amenities</a></li>
+        <li><a href="/about-page">About</a></li>
+        <li><a href="/contact-page">Contact</a></li>
+        <li class="profile-wrapper">
+          <div id="profileAvatar" class="avatar-circle">
+            <svg class="avatar-svg" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div id="profileDropdown" class="profile-dropdown">
+            <a href="#" id="profileLink">Profile</a>
+            <a href="#" id="historyLink">History</a>
+            <a href="#" id="logoutProfileBtn">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ROOMS SECTION -->
+  <section class="rooms-section">
+    <div class="overlay"></div>
+    <h2>Our Rooms</h2>
+
+    <!-- STANDARD ROOMS -->
+    <h3 class="category-title">Standard Rooms</h3>
+    <div class="rooms-container" id="standardRooms"></div>
+
+    <!-- DELUXE ROOMS -->
+    <h3 class="category-title">Deluxe Rooms</h3>
+    <div class="rooms-container" id="deluxeRooms"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Casa Tente Boutique Hotel | Matnog, Sorsogon</p>
+  </footer>
+
+  <!-- ===========================
+      ROOM DETAILS POPUP 
+      =========================== -->
+  <div id="roomPopup" class="room-popup-overlay">
+    <div class="room-popup">
+
+      <!-- LEFT IMAGE -->
+      <div class="popup-image-container">
+        <img id="popupRoomImage" src="" alt="Room Image">
+      </div>
+
+      <!-- RIGHT DETAILS -->
+      <div class="popup-details">
+        <h2 id="popupRoomName"></h2>
+        <p id="popupRoomType" class="room-type"></p>
+        <p id="popupDescription"></p>
+
+        <p><strong>Max Guests:</strong> <span id="popupMaxGuests"></span></p>
+
+        <p><strong>Amenities:</strong></p>
+        <ul id="popupAmenities"></ul>
+
+        <p class="popup-price">₱<span id="popupPrice"></span> / night</p>
+
+        <div class="popup-buttons">
+          <button id="bookRoomBtn" class="book-btn">Book Now</button>
+          <button id="closePopupBtn" class="close-btn">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <a id="hiddenBookNowLink" style="display:none;"></a>
+
+  <!-- EXTERNAL JAVASCRIPT FILE -->
+  <script src="js/rooms.js"></script>
+  <script src="js/auth-check.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guest Feedback | Casa Tente Boutique Hotel</title>
+
+  <!-- ✅ CSS -->
+  <link rel="stylesheet" href="css/feedback.css" />
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="logo">CasaTente Boutique Hotel</div>
+    <nav>
+      <ul>
+        <li><a href="/home-page">Home</a></li>
+        <li><a href="/rooms-page">Rooms</a></li>
+        <li><a href="/amenities-page">Amenities</a></li>
+        <li><a href="/about-page">About</a></li>
+        <li><a href="/contact-page">Contact</a></li>
+        <li class="profile-wrapper">
+          <div id="profileAvatar" class="avatar-circle">
+            <svg class="avatar-svg" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div id="profileDropdown" class="profile-dropdown">
+            <a href="#" id="profileLink">Profile</a>
+            <a href="#" id="historyLink">History</a>
+            <a href="#" id="logoutProfileBtn">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- FEEDBACK SECTION -->
+  <section class="feedback-section">
+    <div class="feedback-container">
+      <h2>We Value Your Feedback</h2>
+      <p>Please share your thoughts, suggestions, or experiences with us.</p>
+
+      <form id="feedbackForm">
+        <div class="form-group">
+          <label for="fullname">Full Name</label>
+          <input type="text" id="fullname" name="fullname" required readonly />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required readonly />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <!-- ⭐ STAR RATING -->
+        <div class="form-group rating-group">
+          <label for="rating">Rating</label>
+          <div class="star-rating" id="starRating">
+            <svg data-value="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21 16.54 13.97 22 9.24 14.81 8.62 12 2 9.19 8.63 2 9.24 7.46 13.97 5.82 21z"/></svg>
+            <svg data-value="2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21 16.54 13.97 22 9.24 14.81 8.62 12 2 9.19 8.63 2 9.24 7.46 13.97 5.82 21z"/></svg>
+            <svg data-value="3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21 16.54 13.97 22 9.24 14.81 8.62 12 2 9.19 8.63 2 9.24 7.46 13.97 5.82 21z"/></svg>
+            <svg data-value="4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21 16.54 13.97 22 9.24 14.81 8.62 12 2 9.19 8.63 2 9.24 7.46 13.97 5.82 21z"/></svg>
+            <svg data-value="5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21 16.54 13.97 22 9.24 14.81 8.62 12 2 9.19 8.63 2 9.24 7.46 13.97 5.82 21z"/></svg>
+          </div>
+          <input type="hidden" id="rating" name="rating" required />
+        </div>
+
+        <button type="submit" class="submit-btn">Submit Feedback</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- POPUP -->
+  <div id="feedbackSuccessPopup" class="feedback-success-popup">
+    <div class="popup-content">
+      <h3>✅ Feedback Submitted Successfully!</h3>
+      <p>Thank you for sharing your experience with Casa Tente Boutique Hotel.</p>
+      <button id="closeFeedbackPopup">Okay</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Casa Tente Boutique Hotel | Matnog, Sorsogon</p>
+  </footer>
+
+  <script src="js/auth-check.js"></script>
+  <script src="js/feedback.js"></script>
+
+</body>
+</html>

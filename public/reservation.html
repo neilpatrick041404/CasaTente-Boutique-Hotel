@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Room Reservation | Casa Tente Boutique Hotel</title>
+  
+  <!-- ✅ Flatpickr Date Picker -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/reservation.css">
+
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+  <!-- ===== HEADER ===== -->
+  <header class="main-header">
+    <div class="logo">CasaTente Boutique Hotel</div>
+    <nav>
+      <ul>
+        <li><a href="/home-page">Home</a></li>
+        <li><a href="/rooms-page">Rooms</a></li>
+        <li><a href="/amenities-page">Amenities</a></li>
+        <li><a href="/about-page">About</a></li>
+        <li><a href="/contact-page">Contact</a></li>
+        <li class="profile-wrapper">
+          <div id="profileAvatar" class="avatar-circle">
+            <svg class="avatar-svg" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div id="profileDropdown" class="profile-dropdown">
+            <a href="#" id="profileLink">Profile</a>
+            <a href="#" id="historyLink">History</a>
+            <a href="#" id="logoutProfileBtn">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== RESERVATION SECTION ===== -->
+  <section class="reservation-section">
+    <div class="room-image" id="roomDetails">
+      <p>Loading room details...</p>
+    </div>
+
+    <form id="reservationForm" class="reservation-form">
+      <h3>Room Reservation Form</h3>
+
+      <label>Full Name</label>
+      <input type="fullname" id="fullname" required>
+
+      <label>Email Address</label>
+      <input type="email" id="email" required>
+
+      <label>Contact Number</label>
+      <input type="contact" id="contact" required>
+
+      <div class="date-row">
+        <div>
+          <label>Check-in Date</label>
+          <input type="date" id="checkin" required>
+        </div>
+        <div>
+          <label>Check-out Date</label>
+          <input type="date" id="checkout" required>
+        </div>
+      </div>
+
+      <p class="totalPrice" id="totalPrice">Total: PHP 0</p>
+      
+      <p class="discount-note">
+        * PWDs, pregnant guests, and senior citizens may avail of discounts upon presenting a valid ID at the hotel’s front desk.
+      </p>
+
+      <div class="guest-label">
+        <label for="guests">Number of Guests</label>
+        <span class="guest-note">Maximum of 4 adults only</span>
+      </div>
+      <input type="number" id="guests" min="1" max="4" required>
+
+      <label>Special Requests</label>
+      <textarea id="requests" rows="3" placeholder="Add any special requests..."></textarea>
+
+      <button type="submit">Submit Reservation</button>
+    </form>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>&copy; 2025 Casa Tente Boutique Hotel | Matnog, Sorsogon</p>
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script src="/js/reservation.js"></script>
+  <script src="/js/auth-check.js" defer></script>
+</body>
+</html>

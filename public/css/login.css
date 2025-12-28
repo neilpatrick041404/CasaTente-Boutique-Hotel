@@ -1,0 +1,359 @@
+/* ====== GLOBAL STYLES ====== */
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: url("../images/hotel-bg.jpg") no-repeat center center/cover;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  overflow-y: auto;
+  padding-top: 3rem;
+}
+
+/* Dark overlay background blur */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 0;
+}
+
+/* ====== LOGIN BOX ====== */
+.login-box {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 16px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+  margin: 3rem 0;
+}
+
+/* ====== OVAL LOGO (Homepage Style) ====== */
+.oval-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: #ffffff;
+  padding: 1rem 2rem;
+  border-radius: 100px; /* ✅ Oval shape */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  margin: 0 auto 1.8rem auto;
+  width: fit-content;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.oval-logo:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+}
+
+.oval-logo img {
+  width: 55px;
+  height: 55px;
+  margin-right: 1rem;
+  background: transparent;
+  display: block;
+}
+
+.oval-logo .logo-text {
+  text-align: left;
+}
+
+.oval-logo .logo-text h1 {
+  color: #111;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.oval-logo .logo-text p {
+  color: #444;
+  font-size: 0.9rem;
+  margin: 0;
+  letter-spacing: 0.3px;
+  font-weight: 700;
+}
+
+/* ===== HEADING BELOW LOGO ===== */
+.login-box h2 {
+  color: #4f46e5;
+  margin-top: 1.5rem;
+  margin-bottom: 1.2rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+/* ====== FORM INPUTS ====== */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.3rem;
+  color: #333;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.8rem;
+  margin-top: 0.3rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+input:focus {
+  border-color: #4f46e5;
+  outline: none;
+}
+
+/* ====== BUTTON ====== */
+button {
+  width: 100%;
+  box-sizing: border-box;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 0.9rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #4338ca;
+}
+
+/* ====== FORGOT PASSWORD LINK ====== */
+.forgot {
+  text-align: right;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.forgot a {
+  color: #4f46e5;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.forgot a:hover {
+  text-decoration: underline;
+}
+
+/* ====== DIVIDER + TERMS ====== */
+.divider {
+  border-top: 1px solid #ddd;
+  margin: 1.8rem 0;
+}
+
+.terms {
+  font-size: 0.85rem;
+  color: #555;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.terms a {
+  color: #4f46e5;
+  text-decoration: none;
+}
+
+.terms a:hover {
+  text-decoration: underline;
+}
+
+/* ====== FOOTER ====== */
+.footer {
+  text-align: center;
+  color: #777;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 480px) {
+  .login-box {
+    padding: 2.5rem 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  .oval-logo {
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+  }
+
+  .oval-logo img {
+    margin: 0 0 0.4rem 0;
+  }
+
+  .oval-logo .logo-text {
+    text-align: center;
+  }
+}
+
+/* ====== POPUP STYLES ====== */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  background: #fff;
+  color: #333;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  padding: 1.5rem;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.popup.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: all;
+}
+
+.popup.success {
+  border-top: 6px solid #22c55e; /* Green */
+}
+
+.popup.error {
+  border-top: 6px solid #ef4444; /* Red */
+}
+
+.popup h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.popup p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.popup button {
+  margin-top: 1rem;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.popup button:hover {
+  background: #4338ca;
+}
+
+/* ====== LOGIN SUCCESS POPUP ====== */
+.success-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 4000;
+}
+
+.success-popup.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.success-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: popIn 0.3s ease;
+}
+
+.success-box h3 {
+  font-size: 1.1rem;
+  color: #16a34a;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+
+/* Admin version (gold highlight) */
+.success-box.admin-style h3 {
+  color: #ca8a04;
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #4f46e5, #22c55e);
+  transition: width 2s linear;
+  border-radius: 10px;
+}
+
+.success-box.admin-style .progress {
+  background: linear-gradient(90deg, #ca8a04, #facc15);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

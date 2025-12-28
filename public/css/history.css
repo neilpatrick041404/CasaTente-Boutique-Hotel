@@ -1,0 +1,622 @@
+/* ===== GLOBAL STYLES (copied from profile.css) ===== */
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: url("../images/hotel-bg.jpg") no-repeat center center/cover;
+  background-attachment: fixed;
+  color: #fff;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+body {
+  isolation: isolate;
+}
+
+header,
+.profile-section,
+footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== HEADER ===== */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 3rem;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #333;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+nav a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover,
+nav a.active {
+  color: #4f46e5;
+}
+
+/* ===== PROFILE AVATAR + DROPDOWN ===== */
+.profile-wrapper {
+  position: relative;
+}
+
+.avatar-circle {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #444;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  color: #444;
+  background: transparent;
+}
+
+.avatar-circle:hover {
+  background: rgba(90, 90, 255, 0.08);
+  transform: scale(1.05);
+}
+
+.avatar-svg {
+  width: 20px;
+  height: 20px;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: white;
+  border-radius: 10px;
+  min-width: 140px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.profile-dropdown.show {
+  display: flex;
+}
+
+.profile-dropdown a {
+  padding: 0.7rem 1rem;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.profile-dropdown a:hover {
+  background: #f3f4f6;
+}
+
+/* ===== MAIN HISTORY CARD ===== */
+.profile-section {
+  width: 100%;
+  max-width: 1100px;
+  margin: 4rem auto;
+  padding: 0 2rem 4rem;
+  box-sizing: border-box;
+}
+
+.profile-card {
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 18px;
+  padding: 2.5rem 3rem 2.7rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  color: #333;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  color: white;
+  font-size: 0.85rem;
+  padding: 1.5rem 0;
+  opacity: 0.9;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  margin-top: auto;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== HISTORY-PAGE SPECIFIC STYLES ===== */
+.history-header {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #4f46e5;
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.history-note {
+  text-align: center;
+  font-size: 0.95rem;
+  padding: 0.8rem;
+  background: rgba(255,255,255,0.88);
+  border-radius: 12px;
+  margin-bottom: 1.8rem;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Reservation Card */
+.reservation-item {
+  border: 1px solid #ddd;
+  padding: 1.3rem 1.6rem;
+  border-radius: 12px;
+  margin-bottom: 1.4rem;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.res-title {
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: 0.6rem;
+  color: #4f46e5;
+}
+
+.res-row {
+  margin: 0.3rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Cancel Button */
+.cancel-btn {
+  background: #ef4444;
+  color: #fff;
+  padding: 0.55rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  margin-top: 0.8rem;
+  transition: 0.2s;
+}
+
+.cancel-btn:hover {
+  background: #dc2626;
+}
+
+/* Popup */
+.cancel-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 99999999;
+}
+
+.cancel-popup.show {
+  display: flex;
+  opacity: 1;
+}
+
+.cancel-box {
+  background: white;
+  padding: 2rem;
+  width: 90%;
+  max-width: 420px;
+  border-radius: 16px;
+  text-align: center;
+  animation: popIn 0.25s ease;
+}
+
+textarea {
+  width: 100%;
+  height: 120px;
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  resize: none;
+}
+
+.cancel-actions {
+  margin-top: 1.2rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+}
+
+.btn-send {
+  background: #4f46e5;
+  color: white;
+  padding: 0.6rem 1.3rem;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background: #e5e7eb;
+  color: #333;
+  padding: 0.6rem 1.3rem;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.history-note {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  color: #555;  /* gray text */
+  line-height: 1.4;
+}
+.history-note strong {
+  color: #333;
+}
+
+/* Row 2: Guests | Total | Status */
+.res-row-three {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+}
+
+/* Styling for labels */
+.res-row-two span,
+.res-row-three span {
+  color: #555;
+  font-weight: 600;
+}
+
+/* Status colors */
+.status-pending { color: #d97706; }   /* orange */
+.status-confirmed { color: #2563eb; } /* blue */
+.status-completed { color: #16a34a; } /* green */
+.status-in-progress { color: #0ea5e9; } /* Light blue */
+.status-cancelled { color: #dc2626; } /* red */
+
+/* Button */
+.cancel-btn {
+  margin-top: 1.2rem;
+  padding: 0.6rem 1.4rem;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.cancel-btn:hover {
+  background: #dc2626;
+}
+
+/* TRUE CENTERED CHECK-OUT USING GRID */
+.res-row-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3 equal columns */
+  align-items: center;
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+}
+
+.res-row-two div:nth-child(1) {
+  text-align: left;   /* Check-in */
+}
+
+.res-row-two div:nth-child(2) {
+  text-align: center; /* Check-out perfectly centered */
+}
+
+.res-row-two div:nth-child(3) {
+  display: none;      /* placeholder column, not used */
+}
+
+/* Popup Background */
+.cancel-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 99999999;
+}
+
+.cancel-popup.show {
+  display: flex;
+  opacity: 1;
+}
+
+/* Popup Box */
+.cancel-box {
+  background: #ffffff;
+  padding: 2rem 2.3rem;
+  width: 90%;
+  max-width: 460px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  animation: popIn 0.25s ease forwards;
+  color: #333;
+}
+
+/* Title */
+.cancel-title {
+  color: #4f46e5;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* Textarea */
+.cancel-box textarea {
+  width: 100%;
+  height: 140px;
+  padding: 0.9rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  resize: none;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.cancel-box textarea:focus {
+  border-color: #4f46e5;
+}
+
+/* Buttons */
+.cancel-actions {
+  margin-top: 1.3rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn-send {
+  background: #4f46e5;
+  color: white;
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-send:hover {
+  background: #4338ca;
+}
+
+.btn-cancel {
+  background: #e5e7eb;
+  color: #333;
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-cancel:hover {
+  background: #d1d5db;
+}
+
+/* Animation */
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+textarea.input-error {
+  border: 2px solid red !important;
+}
+
+#sendCancelBtn {
+  min-width: 110px; /* prevents shrinking/growing */
+}
+#sendCancelBtn.sending {
+  background: #6b64f1;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.profile-success-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 999999999;
+}
+
+.profile-success-popup.show {
+  display: flex;
+  opacity: 1;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.success-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+  color: #333;
+  animation: popIn 0.25s ease forwards;
+}
+
+.success-box h3 {
+  color: #16a34a;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.progress {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #4f46e5, #22c55e);
+  border-radius: 10px;
+  transition: width 2s linear;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ================================
+   UNIVERSAL LOGOUT POPUP FIX
+================================ */
+
+.logout-popup,
+.success-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 999999999;
+}
+
+.logout-popup.show,
+.success-popup.show {
+  display: flex;
+  opacity: 1;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.logout-popup-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+  color: #333;
+  animation: popIn 0.3s ease forwards;
+}
+
+.logout-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+#confirmLogout {
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+#confirmLogout:hover {
+  background: #dc2626;
+}
+
+#cancelLogout {
+  background: #e5e7eb;
+  color: #333;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+#cancelLogout:hover {
+  background: #d1d5db;
+}

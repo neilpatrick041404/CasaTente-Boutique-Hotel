@@ -1,0 +1,2171 @@
+/* ============ GLOBAL ============ */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: url("../images/hotel-bg.jpg") no-repeat center center/cover;
+  background-attachment: fixed;
+  color: #111827;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Subtle dark overlay for luxury look */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  z-index: 0;
+}
+
+/* ============ SIDEBAR ============ */
+/* ============ SIDEBAR ============ */
+.sidebar {
+  width: 240px;
+  background: rgba(255, 255, 255, 0.9);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  position: fixed; /* ✅ Keep sidebar fixed on the screen */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  z-index: 100; /* ensure it's above content */
+}
+
+.sidebar h2 {
+  font-size: 1.2rem;
+  color: #4f46e5;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+/* Sidebar menu */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  flex: 1; /* ✅ pushes logout to bottom */
+}
+
+.sidebar ul li {
+  margin-bottom: 1rem;
+}
+
+.sidebar ul a {
+  display: block;
+  text-decoration: none;
+  color: #111827;
+  font-weight: 500;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.sidebar ul a:hover,
+.sidebar ul a.active {
+  background: #4f46e5;
+  color: #fff;
+}
+
+/* ✅ Fixed Logout Button */
+.logout {
+  width: 100%;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 0.8rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: auto; /* push to bottom */
+}
+
+.logout:hover {
+  background: #dc2626;
+}
+
+/* ============ MAIN CONTENT ============ */
+.main-content {
+  flex: 1;
+  position: relative;
+  z-index: 2;
+  padding: 2rem 3rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  margin: 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  overflow-y: auto;
+  margin-left: 300px;
+}
+
+.main-content h1 {
+  font-size: 1.6rem;
+  color: #111827;
+  font-weight: 700;
+  margin-bottom: 1.8rem;
+  border-bottom: 2px solid rgba(79, 70, 229, 0.2);
+  padding-bottom: 0.6rem;
+}
+
+/* ============ TABLE ============ */
+.table-container {
+  overflow-x: auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+}
+
+thead {
+  background: #4f46e5;
+  color: white;
+  font-weight: 600;
+}
+
+th, td {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+tr:hover {
+  background: rgba(79, 70, 229, 0.08);
+}
+
+th:first-child, td:first-child {
+  border-radius: 12px 0 0 0;
+}
+
+td:last-child {
+  text-align: center;
+}
+
+/* ============ BUTTONS ============ */
+.btn {
+  display: inline-block;
+  background: #4f46e5;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+}
+
+.btn-delete {
+  background: #ef4444;
+}
+
+.btn-delete:hover {
+  background: #dc2626;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .main-content {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+/* ===================== MODAL ===================== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal.hidden { display: none; }
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  width: 400px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+}
+.modal-content h3 { margin-bottom: 1rem; }
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.modal-content input,
+.modal-content textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.room-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.add-btn { background: #4f46e5; color: white; }
+.save-btn { background: #22c55e; color: white; }
+.cancel-btn { background: #ef4444; color: white; }
+
+/* ===================== BUTTON COLORS ===================== */
+.add-btn {
+  background: #4f46e5;
+  color: white;
+}
+.add-btn:hover {
+  background: #3730a3;
+}
+
+.edit-btn {
+  background: #3b82f6;
+  color: white;
+}
+.edit-btn:hover {
+  background: #2563eb;
+}
+
+.btn-delete {
+  background: #ef4444;
+  color: white;
+}
+.btn-delete:hover {
+  background: #dc2626;
+}
+
+/* ===================== MODAL ===================== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  width: 420px;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-content h3 {
+  margin-bottom: 1rem;
+  color: #111827;
+  text-align: center;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-content input,
+.modal-content textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  resize: none;
+}
+
+.modal-content textarea {
+  min-height: 80px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.save-btn {
+  background: #22c55e;
+  color: white;
+}
+.save-btn:hover {
+  background: #16a34a;
+}
+
+.cancel-btn {
+  background: #ef4444;
+  color: white;
+}
+.cancel-btn:hover {
+  background: #dc2626;
+}
+
+/* ===================== FIX: SCROLLABLE & FLEXIBLE MODAL ===================== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* align to top but allow scroll */
+  overflow-y: auto; /* enable scroll for tall modals */
+  z-index: 1000;
+  padding: 40px 0; /* top/bottom padding for spacing */
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  width: 420px;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.2s ease-in-out;
+  margin: auto; /* ensure proper centering inside scroll area */
+  position: relative;
+}
+
+.modal-content::-webkit-scrollbar {
+  display: none; /* hide internal scrollbars if any */
+}
+
+/* ===================== ROOM HEADER ===================== */
+.room-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.room-header h3 {
+  font-size: 1.4rem;
+  color: #111827;
+}
+
+/* ===================== POPUP STYLES ===================== */
+.popup {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+.popup.hidden {
+  display: none;
+}
+
+.popup-box {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  padding: 25px 35px;
+  text-align: center;
+  width: 340px;
+  animation: scaleIn 0.25s ease;
+}
+
+.popup-box h3 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.popup-box p {
+  color: #374151;
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+/* ✅ Popup Colors */
+.popup.success .popup-box {
+  border-top: 5px solid #22c55e;
+}
+
+.popup.error .popup-box {
+  border-top: 5px solid #ef4444;
+}
+
+/* ✅ Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* ===================== AMENITIES TABLE ENHANCEMENTS ===================== */
+
+/* Add line between indoor and outdoor sections */
+.amenity-section h4 {
+  font-size: 1.1rem;
+  color: #111827;
+  margin: 1.8rem 0 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.amenity-section h4::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: rgba(79, 70, 229, 0.25);
+  margin-left: 10px;
+  border-radius: 2px;
+}
+
+/* Fix header alignment for indoor amenities */
+.table th {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  background: #4f46e5;
+  color: white;
+}
+
+.table th:nth-child(1) {
+  width: 70px;
+  text-align: center;
+}
+
+.table th:nth-child(2) {
+  width: 250px;
+  text-align: left;
+}
+
+.table th:nth-child(3) {
+  width: 500px;
+  text-align: left;
+}
+
+.table th:last-child {
+  text-align: center;
+  width: 200px;
+}
+
+/* Match indoor and outdoor table layout */
+.table td {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.table td:first-child {
+  text-align: center;
+}
+
+.table td:last-child {
+  text-align: center;
+}
+
+/* Center align the action buttons */
+.table td:last-child .btn {
+  margin: 0 2px;
+}
+
+/* Keep spacing consistent between the two tables */
+.amenity-section table {
+  margin-bottom: 2rem;
+}
+
+/* Add subtle shadow separation for better visual layering */
+.amenity-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem 1rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ===================== FIX: ROOMS TABLE ALIGNMENT ===================== */
+.room-header + .table {
+  width: 100%;
+}
+
+/* Restore column width and spacing for Rooms table only */
+.room-header + .table th:nth-child(1),
+.room-header + .table td:nth-child(1) {
+  width: 70px;
+  text-align: center;
+}
+
+.room-header + .table th:nth-child(2),
+.room-header + .table td:nth-child(2) {
+  width: 220px; /* Room name */
+}
+
+.room-header + .table th:nth-child(3),
+.room-header + .table td:nth-child(3) {
+  width: 120px; /* Room type - smaller now */
+  text-align: center;
+}
+
+.room-header + .table th:nth-child(4),
+.room-header + .table td:nth-child(4) {
+  width: 130px; /* Price */
+  text-align: center;
+}
+
+.room-header + .table th:nth-child(5),
+.room-header + .table td:nth-child(5) {
+  width: 100px; /* Guests */
+  text-align: center;
+}
+
+.room-header + .table th:nth-child(6),
+.room-header + .table td:nth-child(6) {
+  width: 130px; /* Status */
+  text-align: center;
+}
+
+.room-header + .table th:last-child,
+.room-header + .table td:last-child {
+  width: 200px; /* Actions */
+  text-align: center;
+}
+
+/* Center align edit and delete buttons */
+.room-header + .table td:last-child .btn {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 4px;
+}
+
+/* Slightly reduce button size to fit better */
+.room-header + .table td:last-child .btn {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+}
+
+/* ===================== FIX: ROOMS TABLE BUTTON ALIGNMENT ===================== */
+
+/* Ensure the Actions column has enough width for both buttons */
+.room-header + .table th:last-child,
+.room-header + .table td:last-child {
+  width: 220px;
+  text-align: center;
+}
+
+/* Group the buttons horizontally */
+.room-header + .table td:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Make both buttons equal width and height */
+.room-header + .table td:last-child .btn {
+  min-width: 80px;
+  text-align: center;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+/* Ensure color scheme consistency */
+.room-header + .table td:last-child .edit-btn {
+  background: #3b82f6;
+}
+.room-header + .table td:last-child .edit-btn:hover {
+  background: #2563eb;
+}
+
+.room-header + .table td:last-child .btn-delete {
+  background: #ef4444;
+}
+.room-header + .table td:last-child .btn-delete:hover {
+  background: #dc2626;
+}
+
+/* Keep consistent vertical spacing for the entire table */
+.room-header + .table td {
+  vertical-align: middle;
+  height: 60px;
+}
+
+/* Optional: make the header Action label perfectly centered */
+.room-header + .table th:last-child {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* ===================== CONFIRMATION POPUP ===================== */
+#confirmPopup .popup-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  width: 360px;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.3);
+  animation: scaleIn 0.25s ease;
+  text-align: center;
+}
+
+#confirmPopup h3 {
+  margin-bottom: 10px;
+  color: #dc2626;
+}
+
+#confirmPopup p {
+  font-size: 0.95rem;
+  color: #374151;
+  margin-bottom: 15px;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.confirm-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.confirm-btn:hover {
+  background: #dc2626;
+}
+
+/* ===================== AMENITY IMAGE PREVIEW ===================== */
+.amenity-thumb {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  vertical-align: middle;
+}
+
+.amenity-preview {
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-top: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+#imagePreviewContainer {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.amenity-section td:last-child {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* ===================== AMENITIES TABLE REFINEMENT ===================== */
+
+/* Shrink image and name column, give more space to description */
+.amenity-section .table th:nth-child(1),
+.amenity-section .table td:nth-child(1) {
+  width: 60px; /* ID column */
+  text-align: center;
+}
+
+.amenity-section .table th:nth-child(2),
+.amenity-section .table td:nth-child(2) {
+  width: 100px; /* Image column */
+  text-align: center;
+}
+
+.amenity-section .table th:nth-child(3),
+.amenity-section .table td:nth-child(3) {
+  width: 180px; /* Name column */
+  text-align: left;
+}
+
+.amenity-section .table th:nth-child(4),
+.amenity-section .table td:nth-child(4) {
+  width: auto; /* Description column — flexible */
+  text-align: left;
+}
+
+.amenity-section .table th:nth-child(5),
+.amenity-section .table td:nth-child(5) {
+  width: 160px; /* Actions column */
+  text-align: center;
+}
+
+/* Align Edit & Delete side-by-side properly */
+.amenity-section .action-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Keep button sizes consistent */
+.amenity-section .action-buttons .btn {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  min-width: 70px;
+}
+
+/* Adjust image thumbnail size */
+.amenity-thumb {
+  width: 45px;
+  height: 45px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Space between indoor/outdoor sections */
+.amenity-divider {
+  margin: 2rem 0 1.5rem;
+  border: none;
+  border-top: 2px solid rgba(79, 70, 229, 0.2);
+}
+
+/* ===================== ROOM MANAGEMENT (NO IMAGE IN TABLE) ===================== */
+
+/* 🪟 Scrollable modal fix for Add/Edit Room */
+.room-modal-scrollable {
+  max-height: 85vh;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.room-modal-scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+.room-modal-scrollable::-webkit-scrollbar-thumb {
+  background: rgba(79, 70, 229, 0.4);
+  border-radius: 4px;
+}
+.room-modal-scrollable::-webkit-scrollbar-thumb:hover {
+  background: rgba(79, 70, 229, 0.6);
+}
+
+/* 🖼️ Image preview inside modal */
+.room-preview {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 10px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Hide preview when no image */
+#roomImagePreviewContainer.hidden {
+  display: none;
+}
+
+/* ✍️ Room form labels & inputs */
+#roomForm label {
+  font-weight: 600;
+  color: #111827;
+  margin-top: 10px;
+}
+
+#roomForm input[type="text"],
+#roomForm input[type="number"],
+#roomForm textarea {
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 100%;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#roomForm input:focus,
+#roomForm textarea:focus {
+  border-color: #4f46e5;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* 📁 File input clean look */
+#room_image_file {
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+#room_image_file:hover {
+  background: #eef2ff;
+}
+
+/* 💾 Modal buttons layout */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* 📱 Mobile-friendly adjustments */
+@media (max-width: 768px) {
+  .room-modal-scrollable {
+    width: 95%;
+  }
+
+  #roomForm label {
+    font-size: 0.9rem;
+  }
+
+  #roomForm input,
+  #roomForm textarea {
+    font-size: 0.9rem;
+  }
+
+  .room-preview {
+    max-height: 180px;
+  }
+}
+
+/* ===================== FIX: ROOM MODAL WIDTH & IMAGE SIZE ===================== */
+
+/* Match modal width to amenities */
+#roomModal .modal-content {
+  width: 420px; /* same width as amenities */
+  max-width: 90%;
+  border-radius: 12px;
+  background: #fff;
+  padding: 25px;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+/* Scrollable content stays smooth */
+.room-modal-scrollable {
+  max-height: 85vh;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+/* Prevent input boxes from stretching too wide */
+#roomForm input[type="text"],
+#roomForm input[type="number"],
+#roomForm textarea {
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 8px;
+  transition: border-color 0.3s ease;
+}
+
+#roomForm textarea {
+  resize: none;
+  min-height: 80px;
+}
+
+/* Fix image preview size — match amenities style */
+.room-preview {
+  width: 100%;
+  max-width: 360px;
+  max-height: 180px;
+  object-fit: cover;
+  display: block;
+  margin: 10px auto;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Center image container */
+#roomImagePreviewContainer {
+  text-align: center;
+}
+
+/* Hide preview if no image */
+#roomImagePreviewContainer.hidden {
+  display: none;
+}
+
+/* Modal buttons consistent with amenities */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* For smaller screens */
+@media (max-width: 768px) {
+  #roomModal .modal-content {
+    width: 95%;
+  }
+
+  .room-preview {
+    max-width: 100%;
+    max-height: 160px;
+  }
+}
+
+#imagePreviewContainer {
+  min-height: 180px; /* Prevent modal resizing */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#imagePreviewContainer img {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* ===================== FIX: STABLE MODAL SCROLL ===================== */
+
+/* Prevent background scroll when modal is open */
+body.modal-open {
+  overflow: hidden !important;
+}
+
+/* Lock modal position */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* stop the overlay from scrolling */
+  z-index: 1000;
+}
+
+/* Make only the content inside scrollable */
+#roomModal .modal-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  width: 420px;
+  max-height: 85vh; /* viewport height limit */
+  overflow-y: auto; /* internal scroll only */
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+/* Smooth scrollbar for inner content */
+#roomModal .modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+#roomModal .modal-content::-webkit-scrollbar-thumb {
+  background: rgba(79, 70, 229, 0.4);
+  border-radius: 4px;
+}
+#roomModal .modal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(79, 70, 229, 0.6);
+}
+
+/* Lock background when modal is open */
+body.modal-open {
+  overflow: hidden !important;
+}
+
+/* Prevent modal overlay from scrolling */
+.modal {
+  overflow: hidden;
+}
+
+/* Allow modal content itself to scroll internally */
+#amenityModal .modal-content {
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+#amenityModal .modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+#amenityModal .modal-content::-webkit-scrollbar-thumb {
+  background: rgba(79, 70, 229, 0.4);
+  border-radius: 4px;
+}
+
+#amenityModal .modal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(79, 70, 229, 0.6);
+}
+
+.status-tag {
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-tag.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-tag.confirmed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-tag.completed {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.status-tag.cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ===== RESERVATION ACTION BUTTONS ===== */
+.actions {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-confirm,
+.btn-cancel,
+.btn-view {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-confirm {
+  background: #3b82f6;
+}
+.btn-confirm:hover {
+  background: #2563eb;
+}
+
+.btn-cancel {
+  background: #ef4444;
+}
+.btn-cancel:hover {
+  background: #dc2626;
+}
+
+.btn-view {
+  background: #6b7280;
+}
+.btn-view:hover {
+  background: #4b5563;
+}
+
+/* ===== RESERVATION ACTION BUTTONS ===== */
+.actions {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-confirm,
+.btn-cancel,
+.btn-view {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-confirm {
+  background: #3b82f6; /* blue */
+}
+.btn-confirm:hover {
+  background: #2563eb;
+}
+
+.btn-cancel {
+  background: #ef4444; /* red */
+}
+.btn-cancel:hover {
+  background: #dc2626;
+}
+
+.btn-view {
+  background: #6b7280; /* gray */
+}
+.btn-view:hover {
+  background: #4b5563;
+}
+
+/* ==========================================================
+   ✅ PERFECT ALIGNMENT FIX FOR RESERVATION ACTION BUTTONS
+   ========================================================== */
+
+/* Ensure all reservation table cells are consistent */
+.table-container table {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+}
+
+/* Match vertical middle baseline across all columns */
+.table-container table td,
+.table-container table th {
+  vertical-align: middle !important;
+}
+
+/* --- ACTIONS COLUMN --- */
+.table-container table td.actions {
+  position: relative;
+  height: 100%;
+  padding: 0 !important;
+}
+
+/* Make sure the action container fills the entire cell */
+.table-container table td.actions > div,
+.table-container table td.actions {
+  display: flex;
+  align-items: center;          /* Center vertically */
+  justify-content: center;      /* Center horizontally */
+  height: 100%;
+  min-height: 64px;             /* Matches your row height baseline */
+  box-sizing: border-box;
+}
+
+/* Buttons inside the Actions cell */
+.table-container table td.actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 16px;
+  margin: 0 4px;
+  border-radius: 8px;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 0.85rem;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+/* Make sure text badges (like In Progress) align with buttons */
+.table-container table td.actions span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  min-width: 110px;
+  padding: 0 16px;
+  border-radius: 8px;
+  background: #d1fae5;
+  color: #065f46;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* Uniform row height and line divider consistency */
+.table-container table tr {
+  height: auto;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table-container table td {
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+}
+
+/* ==========================================================
+   ✅ FIX: Align Reservation Action Buttons Like Amenities
+   ========================================================== */
+
+.table-container table td.actions {
+  padding: 0.75rem 0.5rem !important;
+  vertical-align: middle !important;
+}/* ==========================================================
+   ✅ FIX: Reservation Action Buttons Column Width + Alignment
+   ========================================================== */
+
+/* Center align the Actions header */
+.table-container table th:last-child {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Make the Actions column wide enough for 3 buttons */
+.table-container table th:last-child,
+.table-container table td.actions {
+  width: 260px; /* ✅ increased from default */
+  text-align: center;
+}
+
+/* Make sure the button group inside Actions fits neatly */
+.table-container table td.actions .action-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap; /* ✅ keeps all 3 buttons on one line */
+  min-width: 250px;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Buttons inside the Actions cell */
+.table-container table td.actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  white-space: nowrap; /* ✅ prevents wrapping text */
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+/* Status badges stay aligned properly */
+.table-container table td.actions span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 6px;
+  background: #d1fae5;
+  color: #065f46;
+  font-weight: 600;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.status-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.status-tag.confirmed {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-tag.cancelled {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.status-tag.in_progress {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.status-tag.completed {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+/* 🌙 Flatpickr custom theme (match your hotel style) */
+.flatpickr-calendar {
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange {
+  background: #4f46e5;
+  color: white;
+}
+
+.flatpickr-day.today {
+  border-color: #4f46e5;
+}
+
+.flatpickr-day.disabled,
+.flatpickr-day.notAllowed {
+  color: #aaa !important;
+  background: #f5f5f5 !important;
+  cursor: not-allowed !important;
+}
+
+/* ===== Flatpickr Disabled Dates Highlight ===== */
+.flatpickr-disabled-day {
+  color: #999 !important;
+  cursor: not-allowed !important;
+  text-decoration: line-through;
+  border-radius: 50%;
+}
+
+/* ===== Highlight Disabled (Booked) Days ===== */
+.flatpickr-disabled-day {
+  color: #999 !important;
+  cursor: not-allowed !important;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.flatpickr-disabled-day:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ================================
+   🎯 FEEDBACK TABLE ONLY (Fixed Layout)
+   ================================ */
+.feedback-table-content {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* keeps columns aligned */
+}
+
+/* ---- Column widths ---- */
+.feedback-table-content th:nth-child(1),
+.feedback-table-content td:nth-child(1) {
+  width: 10%; /* Feedback ID - visible and consistent */
+  text-align: center;
+}
+
+.feedback-table-content th:nth-child(2),
+.feedback-table-content td:nth-child(2) {
+  width: 25%; /* Guest Name */
+}
+
+.feedback-table-content th:nth-child(3),
+.feedback-table-content td:nth-child(3) {
+  width: 20%; /* Rating */
+  text-align: center;
+}
+
+.feedback-table-content th:nth-child(4),
+.feedback-table-content td:nth-child(4) {
+  width: 45%; /* Comment - takes remaining space */
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.5;
+}
+
+/* ---- Header styling ---- */
+.feedback-table-content thead th {
+  background-color: #4f46e5;
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 16px;
+  vertical-align: middle;
+}
+
+/* ---- Table cells ---- */
+.feedback-table-content td {
+  padding: 12px 16px;
+  vertical-align: top;
+}
+
+/* ---- Alternate rows ---- */
+.feedback-table-content tr:nth-child(even) {
+  background-color: #f8f8ff;
+}
+
+/* ---- Rating stars ---- */
+.feedback-table-content td:nth-child(3) i {
+  color: #ffca28;
+}
+
+/* ---- Table container ---- */
+.feedback-table {
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+
+/* ---- Optional hover highlight ---- */
+.feedback-table-content tbody tr:hover {
+  background-color: #f1f1ff;
+  transition: 0.2s ease;
+}
+
+/* ================================
+   ✅ FIX: Rounded Table Headers (Rooms & Amenities)
+   ================================ */
+
+/* Apply only to the top header row of Rooms table */
+.room-header + .table thead tr th:first-child {
+  border-top-left-radius: 12px;   /* smooth left corner */
+}
+
+.room-header + .table thead tr th:last-child {
+  border-top-right-radius: 12px;  /* smooth right corner */
+}
+
+/* Apply to Amenities tables (both indoor and outdoor) */
+.amenity-section .table thead tr th:first-child {
+  border-top-left-radius: 12px;
+}
+
+.amenity-section .table thead tr th:last-child {
+  border-top-right-radius: 12px;
+}
+
+/* Maintain consistent spacing and background */
+.room-header + .table thead,
+.amenity-section .table thead {
+  background: #4f46e5;
+  color: white;
+  font-weight: 600;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
+
+/* Ensure corners stay visible even inside shadowed container */
+.table-container,
+.amenity-section {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* ==========================================================
+   ✅ TABLE COMPACT MODE (Better fit for Action buttons)
+   ========================================================== */
+
+/* Make all table text smaller and tighter */
+.table-container table {
+  font-size: 0.9rem; /* default ~14px → now ~13px */
+}
+
+/* Reduce padding on table headers and data cells */
+.table-container table th,
+.table-container table td {
+  padding: 0.6rem 0.7rem !important; /* tighter rows */
+  vertical-align: middle;
+}
+
+/* Compact the Action buttons for better fit */
+.table-container table td.actions .btn {
+  height: 32px; /* smaller height */
+  padding: 0 10px;
+  font-size: 0.8rem; /* slightly smaller text */
+  border-radius: 6px;
+}
+
+/* Compact the status badges too */
+.table-container table td.actions span,
+.status-tag {
+  font-size: 0.8rem;
+  height: 32px;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+/* Adjust the Actions column width a bit smaller now */
+.table-container table th:last-child,
+.table-container table td.actions {
+  width: 220px;
+}
+
+/* Reduce line height and row spacing */
+.table-container table tr {
+  height: auto;
+}
+
+/* Make all headers slightly smaller */
+.table-container table th {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* ==========================================================
+   ✅ FIX: CENTER STATUS COLUMN CONTENT
+   ========================================================== */
+
+/* Center the Status column (both header and cell content) */
+.table-container table th:nth-child(8),
+.table-container table td:nth-child(8) {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Center the status tag inside its cell perfectly */
+.table-container table td:nth-child(8) .status-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px; /* keeps consistent badge width */
+  text-align: center;
+  margin: 0 auto;
+  height: 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+/* Optional: add subtle shadow for visual polish */
+.table-container table td:nth-child(8) .status-tag {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================
+   ✅ FIX: Amenity Actions Column — Match Rooms Section Exactly
+   ========================================================== */
+
+/* Ensure the Actions column has enough width for both buttons */
+.amenity-section .table th:last-child,
+.amenity-section .table td:last-child {
+  width: 220px; /* ✅ same as Rooms section */
+  text-align: center;
+}
+
+/* Group the buttons horizontally with even spacing */
+.amenity-section .table td:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Make both buttons equal width and height */
+.amenity-section .table td:last-child .btn {
+  min-width: 80px;
+  text-align: center;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  transition: transform 0.2s ease, background 0.3s ease;
+  font-weight: 600;
+}
+
+/* Ensure color scheme consistency */
+.amenity-section .table td:last-child .edit-btn {
+  background: #3b82f6;
+  color: #fff;
+}
+.amenity-section .table td:last-child .edit-btn:hover {
+  background: #2563eb;
+}
+
+.amenity-section .table td:last-child .btn-delete {
+  background: #ef4444;
+  color: #fff;
+}
+.amenity-section .table td:last-child .btn-delete:hover {
+  background: #dc2626;
+}
+
+/* Keep consistent vertical spacing for the entire table */
+.amenity-section .table td {
+  vertical-align: middle;
+  height: 60px; /* ✅ matches Rooms table row height */
+}
+
+/* Optional: make the header Action label perfectly centered */
+.amenity-section .table th:last-child {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* ==========================================================
+   ✅ LOGOUT POPUP — MATCH AMENITIES STYLE (Smooth + Blurred)
+   ========================================================== */
+
+/* --- Overlay --- */
+.logout-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+}
+
+/* When visible */
+.logout-popup.show {
+  display: flex;
+  opacity: 1;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* --- Popup Box --- */
+.logout-popup-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  color: #111827;
+  animation: popIn 0.3s ease forwards;
+  z-index: 10000;
+}
+
+/* --- Title --- */
+.logout-popup-box h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1.4rem;
+  color: #111827;
+}
+
+/* --- Buttons Container --- */
+.logout-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* --- Buttons --- */
+.logout-actions button {
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Confirm logout (Red) */
+#confirmLogout {
+  background: #ef4444;
+  color: #fff;
+}
+#confirmLogout:hover {
+  background: #dc2626;
+}
+
+/* Cancel logout (Gray) */
+#cancelLogout {
+  background: #e5e7eb;
+  color: #333;
+}
+#cancelLogout:hover {
+  background: #d1d5db;
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ==========================================================
+   ✅ LOGOUT SUCCESS POPUP — MATCH FRONTEND STYLE
+   ========================================================== */
+
+.success-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(5px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 99999;
+}
+
+.success-popup.show {
+  display: flex;
+  opacity: 1;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.success-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  animation: popIn 0.3s ease forwards;
+  color: #111827;
+}
+
+.success-box h3 {
+  color: #16a34a;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* Progress Bar */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.progress {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #4f46e5, #22c55e);
+  border-radius: 10px;
+  transition: width 2s linear;
+}
+
+/* Reuse Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ==========================================================
+   ✅ FINAL FIX — Tighten the gap between "Amenities" and "Indoor Amenities"
+   ========================================================== */
+.main-content h1 {
+  margin-bottom: 0.5rem !important; /* reduce space below page title */
+}
+
+.amenity-section {
+  padding-top: 0.3rem !important; /* tighten internal padding */
+}
+
+.amenity-section h4 {
+  margin-top: 0.4rem !important; /* bring "Indoor Amenities" closer */
+}
+
+/* ============================
+   CALENDAR VIEW CONTAINER
+============================ */
+.calendar-view {
+  width: 100%;
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  margin-top: 20px;
+}
+
+/* ============================
+   HEADER & MONTH NAV
+============================ */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.calendar-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.month-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.month-btn {
+  background: #f3f3f3;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.month-btn:hover {
+  background: #e4e4e4;
+}
+
+/* ============================
+   GRID LAYOUT
+============================ */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: 200px repeat(31, 1fr);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.calendar-row {
+  display: contents;
+}
+
+/* ============================
+   LEFT COLUMN — ROOM NAME
+============================ */
+.room-label {
+  background: #fafafa;
+  border-right: 1px solid #ddd;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+/* ============================
+   DAY CELLS
+============================ */
+.day-cell {
+  border-left: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  height: 40px;
+  position: relative;
+  background: #fff;
+}
+
+.day-header {
+  font-size: 12px;
+  padding: 8px 0;
+  text-align: center;
+  background: #f7f7f7;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ccc;
+}
+
+/* ============================
+   RESERVATION BARS
+============================ */
+.reservation-bar {
+  position: absolute;
+  top: 6px;
+  left: 2px;
+  right: 2px;
+  height: 28px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 11px;
+  padding: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* STATUS COLORS */
+.res-status-pending {
+  background: #f0ad4e;
+}
+
+.res-status-confirmed {
+  background: #5cb85c;
+}
+
+.res-status-cancelled {
+  background: #d9534f;
+}
+
+/* ============================
+   VIEW SWITCHER
+============================ */
+.view-switcher {
+  margin-bottom: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.view-btn {
+  background: #eee;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.view-btn.active {
+  background: #007bff;
+  color: #fff;
+  border-color: #0069d9;
+}
+
+/* Utility hidden class used across JS */
+.hidden {
+  display: none !important;
+}
+
+.calendar-container {
+  overflow-x: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.calendar-header-row {
+  display: grid;
+  grid-auto-flow: column;
+  background: #f3f3f3;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.calendar-body {
+  display: grid;
+  grid-template-columns: 200px auto;
+}
+
+.calendar-room-row {
+  display: grid;
+  grid-auto-flow: column;
+  border-bottom: 1px solid #ddd;
+  align-items: center;
+}
+
+.calendar-room-name {
+  font-weight: bold;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.calendar-day-cell {
+  border-right: 1px solid #ddd;
+  height: 40px;
+  position: relative;
+}
+
+.reservation-block {
+  position: absolute;
+  top: 6px;
+  height: 28px;
+  border-radius: 4px;
+  color: white;
+  font-size: 12px;
+  padding-left: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.calendar-body {
+  display: block;
+}
+
+.calendar-room-row {
+  display: grid;
+  grid-template-columns: 200px auto;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.calendar-room-row > .calendar-room-name {
+  grid-column: 1 / 2;
+}
+
+.calendar-room-row > .calendar-day-cell {
+  grid-column: auto;
+}
+
+.calendar-header-row {
+  display: grid;
+  grid-template-columns: 200px auto;
+}
+
+.calendar-room-row {
+    position: relative;
+}
+
+/* FIX: render ENTIRE calendar grid instead of only visible part */
+.calendar-container {
+    overflow-x: scroll !important;
+    contain: none !important;
+    will-change: auto !important;
+}
+
+.calendar-body,
+.calendar-header-row {
+    width: max-content !important;
+}
+
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.stat-card {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  font-size: 14px;
+  text-align: center;
+}
+
+.stat-card strong {
+  display: block;
+  font-size: 24px;
+  margin-top: 6px;
+  color: #2563eb;
+}
+
+.analytics-wrapper { display: flex; flex-direction: column; gap: 20px; }
+
+.analytics-section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.analytics-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chart-wrapper { height: 260px; }
+
+.revenue-select {
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.analytics-top-header {
+  display:flex;
+  align-items:center;
+  gap:15px;
+  font-weight:600;
+  font-size:18px;
+  margin-bottom:15px;
+}
+
+.stat-card strong {
+  display: block;
+  margin-top: 6px;
+  color: #2563eb;
+
+  /* Prevent layout breaking */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* Responsive scaling */
+  font-size: clamp(18px, 2.2vw, 28px);
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.status-verified {
+  background: #4CAF50;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.status-unverified {
+  background: #d9534f;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* Center the Guests column */
+.table td:nth-child(4),
+.table th:nth-child(4) {
+  text-align: center !important;
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casa Tente Hotel | Admin Dashboard</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+
+  <!-- 🟣 Sidebar Navigation -->
+<div class="sidebar">
+  <h2>Casa Tente Admin</h2>
+  <ul>
+    <li><a href="#" data-section="rooms" class="active">🏨 Rooms</a></li>
+    <li><a href="#" data-section="reservations">📋 Reservations</a></li>
+    <li><a href="#" data-section="amenities">🪴 Amenities</a></li>
+    <li><a href="#" data-section="feedbacks">💬 Feedbacks</a></li>
+    <li><a href="#" data-section="analytics">📊 Analytics</a></li>
+    <li><a href="#" data-section="users">👤 Users</a></li>
+  </ul>
+  <button id="logoutBtn" class="logout">Logout</button>
+</div>
+
+<div class="main-content">
+  <h1 id="sectionTitle">Rooms</h1>
+
+  <!-- Dynamic content container -->
+  <div id="contentSection" class="table-container">
+    <p>Loading content...</p>
+  </div>
+</div>
+
+<!-- ✅ Success / Error Popup -->
+<div id="popup" class="popup hidden">
+  <div class="popup-box">
+    <h3 id="popupTitle">Success</h3>
+    <p id="popupMessage">Action completed successfully.</p>
+  </div>
+</div>
+
+<!-- ⚠️ Confirmation Popup -->
+<div id="confirmPopup" class="popup hidden">
+  <div class="popup-box">
+    <h3 id="confirmTitle">⚠️ Confirm Delete</h3>
+    <p id="confirmMessage">Are you sure you want to delete this item? This cannot be undone.</p>
+    <div class="popup-actions">
+      <button id="confirmYes" class="btn confirm-btn">Yes, Delete</button>
+      <button id="confirmNo" class="btn cancel-btn">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Logout Confirmation Popup ===== -->
+<div class="logout-popup" id="logoutPopup">
+  <div class="logout-popup-box">
+    <h3>Are you sure you want to log out?</h3>
+    <div class="logout-actions">
+      <button id="confirmLogout">Yes, Log Out</button>
+      <button id="cancelLogout">Cancel</button>
+    </div>
+  </div>
+</div>
+<!-- ✅ Logout Success Popup -->
+<div class="success-popup" id="logoutSuccessPopup">
+  <div class="success-box">
+    <h3>✅ You’ve been logged out successfully!</h3>
+    <div class="progress-bar">
+      <div class="progress" id="logoutProgress"></div>
+    </div>
+  </div>
+</div>
+
+  <script src="js/admin.js"></script>
+  <script src="js/admin-auth.js"></script>
+</body>
+</html>

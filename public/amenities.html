@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amenities | Casa Tente Boutique Hotel</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Explore the luxurious indoor and outdoor amenities at Casa Tente Boutique Hotel in Matnog, Sorsogon." />
+  <meta name="author" content="Casa Tente Boutique Hotel" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/amenities.css" />
+  <link rel="icon" href="images/logo.png" type="image/png" />
+</head>
+
+<body>
+  <!-- ===== HEADER ===== -->
+  <header class="main-header">
+    <div class="logo">CasaTente Boutique Hotel</div>
+    <nav>
+      <ul>
+        <li><a href="/home-page">Home</a></li>
+        <li><a href="/rooms-page">Rooms</a></li>
+        <li><a href="/amenities-page" class="active">Amenities</a></li>
+        <li><a href="/about-page">About</a></li>
+        <li><a href="/contact-page">Contact</a></li>
+        <li class="profile-wrapper">
+          <div id="profileAvatar" class="avatar-circle">
+            <svg class="avatar-svg" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div id="profileDropdown" class="profile-dropdown">
+            <a href="#" id="profileLink">Profile</a>
+            <a href="#" id="historyLink">History</a>
+            <a href="#" id="logoutProfileBtn">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== MAIN AMENITIES SECTION ===== -->
+  <section class="amenities-section">
+    <h2>Our Amenities</h2>
+
+    <!-- OUTDOOR AMENITIES -->
+    <div class="category">
+      <h2>Outdoor Amenities</h2>
+      <!-- ✅ This container ID must match amenities.js -->
+      <div class="amenities-container" id="outdoorAmenities">
+        <p class="loading-text">Loading outdoor amenities...</p>
+      </div>
+    </div>
+
+    <!-- INDOOR AMENITIES -->
+    <div class="category">
+      <h2>Indoor Amenities</h2>
+      <!-- ✅ This container ID must match amenities.js -->
+      <div class="amenities-container" id="indoorAmenities">
+        <p class="loading-text">Loading indoor amenities...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>&copy; 2025 Casa Tente Boutique Hotel | Matnog, Sorsogon</p>
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script src="js/amenities.js" defer></script>
+  <script src="js/auth-check.js" defer></script>
+</body>
+</html>

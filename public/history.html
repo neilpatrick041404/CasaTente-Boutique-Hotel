@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reservation History | CasaTente Boutique Hotel</title>
+
+  <!-- History-specific styling -->
+  <link rel="stylesheet" href="css/history.css">
+</head>
+
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const user = localStorage.getItem("user") || sessionStorage.getItem("user");
+
+    if (!user) {
+      // Prevent access when not logged in
+      localStorage.setItem("redirectAfterLogin", "/history-page");
+      window.location.href = "/login-page";
+    }
+  });
+</script>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">CasaTente Boutique Hotel</div>
+
+        <nav>
+        <ul>
+            <li><a href="/home-page">Home</a></li>
+            <li><a href="/rooms-page">Rooms</a></li>
+            <li><a href="/amenities-page">Amenities</a></li>
+            <li><a href="/about-page">About</a></li>
+            <li><a href="/contact-page">Contact</a></li>
+
+            <!-- Avatar inside UL (this was the missing part) -->
+            <li>
+            <div class="profile-wrapper">
+                <button id="profileAvatar" class="avatar-circle" aria-label="Profile menu">
+                <svg class="avatar-svg" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+                </button>
+
+                <div id="profileDropdown" class="profile-dropdown">
+                <a href="#" id="profileLink">Profile</a>
+                <a href="/history-page" id="historyLink">History</a>
+                <a href="#" id="logoutProfileBtn">Logout</a>
+                </div>
+            </div>
+            </li>
+        </ul>
+        </nav>
+    </header>
+
+  <!-- MAIN CONTENT -->
+  <section class="profile-section">
+    <div class="profile-card">
+      <h2 class="history-header">Your Reservation History</h2>
+
+      <div class="history-note">
+        <strong>NOTE:</strong> Cancellation is allowed only for pending reservations.<br>
+        If the reservation is already confirmed, please contact the hotel.
+      </div>
+
+      <div id="historyList"></div>
+    </div>
+  </section>
+
+  <!-- POPUP -->
+  <div id="cancelPopup" class="cancel-popup">
+    <div class="cancel-box">
+        <h3 class="cancel-title">
+            Cancellation Message
+          <span id="cancelErrorStar" style="color:red; display:none;"> *</span>
+        </h3>
+
+        <p id="cancelErrorText" style="
+            color:red;
+            font-size:0.9rem;
+            margin-top:-5px;
+            margin-bottom:10px;
+            display:none;
+            ">
+            Please enter a reason.
+        </p>
+
+        <textarea id="cancelReason" placeholder="Write your message here..."></textarea>
+
+        <div class="cancel-actions">
+        <button class="btn-send" id="sendCancelBtn">Submit</button>
+        <button class="btn-cancel" id="closeCancelBtn">Close</button>
+        </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS POPUP FOR CANCELLATION -->
+  <div class="profile-success-popup" id="cancelSuccessPopup">
+    <div class="success-box">
+        <h3 id="cancelSuccessTitle">Cancellation Request Sent</h3>
+        <p id="cancelSuccessMessage">Your cancellation request has been submitted successfully.</p>
+
+        <div class="progress-bar">
+            <div class="progress" id="cancelSuccessProgress"></div>
+        </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="js/auth-check.js"></script>
+  <script src="js/history.js"></script>
+
+</body>
+</html>

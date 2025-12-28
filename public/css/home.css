@@ -1,0 +1,1453 @@
+/* ====== GENERAL ====== */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #ffffff;
+  color: #222;
+}
+
+/* ====== HEADER ====== */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 3rem;
+  background: rgba(250, 250, 250, 0.85);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #333;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover,
+nav a.active {
+  color: #4f46e5;
+}
+
+/* ===== LOGIN / LOGOUT BUTTONS (MATCH NAV LINKS) ===== */
+#loginBtn,
+#logoutBtn {
+  background: none;
+  color: #444;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+#loginBtn:hover,
+#logoutBtn:hover {
+  color: #4f46e5;
+}
+
+/* ====== HERO SECTION ====== */
+.hero {
+  position: relative;
+  height: 85vh;
+  background: url("../images/hotel-bg.jpg") no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  overflow: hidden;
+}
+
+/* Overlay for depth */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+/* Hero Container */
+.hero-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  text-align: left;
+  animation: fadeIn 1s ease-in-out;
+  width: 90%;
+  max-width: 1200px;
+}
+
+/* LEFT – Logo */
+.hero-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: slideInLeft 1s ease;
+}
+
+.oval-logo {
+  background: white;
+  border-radius: 100px;
+  padding: 20px 40px;      /* flexible space instead of forced box */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: auto;              /* 🔥 let it adapt to image */
+  height: auto;
+}
+
+.oval-logo img {
+  width: 110px;   /* 🔥 bigger & more premium */
+  height: auto;
+  object-fit: contain;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.1;
+}
+
+.logo-text p {
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.logo-text span {
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  color: #444;
+  font-weight: 600;
+}
+
+/* RIGHT – Quote */
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  animation: slideInRight 1s ease;
+}
+
+.hero-right h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 2px;
+  line-height: 1.3;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  text-transform: none;   /* 🔥 allow normal casing */
+}
+
+/* ====== ANIMATIONS ====== */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ====== RESPONSIVE FIX ====== */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .hero-container {
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .hero-right h1 {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .oval-logo {
+    width: 220px;
+    height: 110px;
+  }
+}
+
+/* ====== BUTTONS ====== */
+.cta-btn {
+  display: inline-block;
+  background: #4f46e5;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.8rem 1.6rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.cta-btn:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+}
+
+/* ====== ROOMS SECTION ====== */
+.rooms-section {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #fff;
+}
+
+.rooms-section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #111;
+}
+
+.rooms-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.room-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.room-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.room-info {
+  padding: 1rem;
+}
+
+.room-card h3 {
+  margin: 0.5rem 0;
+  color: #111;
+  font-size: 1.2rem;
+}
+
+.room-card p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.price {
+  display: block;
+  margin-top: 0.5rem;
+  color: #4f46e5;
+  font-weight: 600;
+}
+
+.book-btn {
+  display: inline-block;
+  background: #4f46e5;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.book-btn:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+}
+
+/* ====== OUTDOOR AMENITIES ====== */
+.outdoor-section {
+  background: #f9fafb;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.outdoor-section h2 {
+  font-size: 1.8rem;
+  color: #111;
+  margin-bottom: 2rem;
+}
+
+.outdoor-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.amenity-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 14px;
+  width: 260px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  color: #333;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.amenity-card:hover {
+  transform: translateY(-5px);
+}
+
+.amenity-card h4 {
+  margin: 1rem 0 0.5rem;
+  color: #222;
+}
+
+.amenity-card p {
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.amenity-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  background: #e0e0e0;
+  border-bottom: 1px solid #ddd;
+  display: block;
+}
+
+/* ====== FOOTER ====== */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: #111;
+  color: #eee;
+  font-size: 0.9rem;
+}
+
+/* ===== LOGIN POPUP FIX ===== */
+.login-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 5000;
+}
+
+.login-popup.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.popup-content {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: popupFadeIn 0.3s ease;
+}
+
+.popup-content h3 {
+  color: #4f46e5;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.popup-content p {
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.popup-actions button {
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+/* ===== MATCH LOGIN POPUP STYLE TO ROOMS PAGE ===== */
+#goLogin {
+  background: #4f46e5 !important; /* Primary blue */
+  color: #fff !important;
+  border: none;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+#goLogin:hover {
+  background: #4338ca !important; /* Slightly darker blue on hover */
+  transform: translateY(-2px);
+}
+
+#cancelLogin {
+  background: #e5e7eb;
+  color: #333;
+}
+
+#cancelLogin:hover {
+  background: #d1d5db;
+}
+
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== FIX: Prevent hidden modal from showing ===== */
+.modal {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal.show {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ===== UNIFIED POPUP STYLING (MATCH ROOMS PAGE) ===== */
+.logout-popup,
+.login-popup,
+.success-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(5px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+  transition: opacity 0.3s ease;
+}
+
+.logout-popup.show,
+.login-popup.show,
+.success-popup.show {
+  display: flex;
+  opacity: 1;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* ===== POPUP BOX ===== */
+.logout-popup-box,
+.popup-content,
+.success-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+  animation: popIn 0.3s ease forwards;
+}
+
+/* ===== TEXT ===== */
+.logout-popup-box h3,
+.popup-content h3,
+.success-box h3 {
+  font-size: 1.1rem;
+  color: #222;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+/* ===== BUTTON LAYOUT ===== */
+.logout-actions,
+.popup-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.logout-actions button,
+.popup-actions button {
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+/* Red = Confirm logout */
+#confirmLogout {
+  background: #ef4444;
+  color: #fff;
+}
+
+#confirmLogout:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+}
+
+/* Gray = Cancel */
+#cancelLogout,
+#cancelLogin {
+  background: #e5e7eb;
+  color: #333;
+}
+
+#cancelLogout:hover,
+#cancelLogin:hover {
+  background: #d1d5db;
+  transform: translateY(-2px);
+}
+
+/* Success color */
+.success-box h3 {
+  color: #16a34a;
+  font-weight: 700;
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.progress {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #4f46e5, #22c55e);
+  transition: width 2s linear;
+  border-radius: 10px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ====== ROOM CARD ALIGNMENT FIX ====== */
+.room-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* makes all equal height in grid */
+}
+
+.room-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.room-info p {
+  flex-grow: 1; /* allows description area to stretch evenly */
+}
+
+.room-info .book-btn {
+  margin-top: auto; /* pushes button to the bottom */
+  align-self: center;
+}
+
+/* ====== AMENITY CARD HEIGHT FIX ====== */
+.outdoor-container {
+  align-items: stretch; /* ensures cards in row are equal height */
+}
+
+.amenity-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.amenity-card h4 {
+  margin: 0.8rem 0 0.3rem;
+  color: #222;
+  font-weight: 600;
+}
+
+.amenity-card p {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center; /* centers vertically */
+  align-items: center;     /* centers vertically */
+  text-align: center;
+  margin: 0 1rem 1rem;
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* ====== ROOM CARD FIX (MATCH ROOM PAGE STYLE) ====== */
+.room-card {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.room-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  background: #e0e0e0;
+}
+
+.room-info {
+  padding: 1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.room-info h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 0.3rem;
+}
+
+/* 🧍 Room capacity (Max persons) */
+.room-info .max-person {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.8rem; /* smaller gap (like room page) */
+}
+
+/* 📝 Room description */
+.room-info p {
+  flex-grow: 1;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+/* 💸 Price */
+.room-info .price {
+  font-weight: 600;
+  color: #4f46e5;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* 🔘 Book button always at bottom */
+.book-btn {
+  background: #4f46e5;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  text-align: center;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin-top: auto;
+}
+
+.book-btn:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+}
+
+/* ====== AMENITY CARD FIX (MATCH AMENITIES PAGE STYLE) ====== */
+.outdoor-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch; /* 🔥 ensures equal card height */
+  gap: 2rem;
+}
+
+.amenity-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 14px;
+  width: 260px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  color: #333;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.amenity-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* Image */
+.amenity-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+  background: #e0e0e0;
+}
+
+/* Title */
+.amenity-card h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #4f46e5;
+  margin: 0.8rem 0 0.4rem;
+}
+
+/* Description (centered and equalized height) */
+.amenity-card p {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #333;
+  padding: 0 1rem 1rem;
+  line-height: 1.4;
+  min-height: 2.8em; /* consistent height */
+}
+
+/* ====== ROOM CARD STYLE FIX (MATCH ROOMS PAGE) ====== */
+.room-card {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.room-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  background: #e0e0e0;
+}
+
+.room-info {
+  padding: 1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.room-info h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 0.4rem;
+}
+
+.room-info .max-person {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 0.8rem;
+}
+
+.room-info .description {
+  flex-grow: 1;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.room-info .price {
+  font-weight: 600;
+  color: #4f46e5;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.book-btn {
+  background: #4f46e5;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  text-align: center;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin-top: auto;
+}
+
+.book-btn:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+}
+
+/* ====== ROOM CARD FIX (EXACT MATCH TO ROOMS PAGE) ====== */
+
+.rooms-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.room-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  backdrop-filter: blur(6px);
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+}
+
+.room-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.room-card h3 {
+  margin: 0.8rem 1rem 0.3rem; /* identical to rooms page */
+  color: #111;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.room-card .max-person {
+  margin: 0.3rem 1rem; /* tighter space between name and description */
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.room-card p.description {
+  margin: 0.3rem 1rem;
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 1.4;
+  flex-grow: 1; /* ensures button stays aligned */
+}
+
+.room-card .price {
+  display: block;
+  margin: 0.8rem 1rem;
+  color: #4f46e5;
+  font-weight: 600;
+}
+
+.book-btn {
+  display: block;
+  background: #4f46e5;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin: 0 auto 1.2rem auto; /* center horizontally and push to bottom */
+  margin-top: auto;
+}
+
+.book-btn:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+}
+
+/* ====== FIX: Max Persons text identical to room page ====== */
+.room-card .max-person {
+  margin: 0.3rem 1rem; /* same spacing as room page */
+  font-size: 0.9rem;
+  color: #222; /* darker like room page */
+  line-height: 1.4;
+}
+
+.room-card .max-person strong {
+  font-weight: 600; /* bold label */
+  color: #111; /* match heading tone */
+}
+
+/* ================================
+   ROOM DETAILS POPUP (MATCH ROOMS PAGE)
+   ================================ */
+
+.room-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(6px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.room-popup-overlay.show {
+  display: flex;
+  opacity: 1;
+}
+
+.room-popup {
+  background: #ffffff;
+  width: 850px;
+  max-width: 95%;
+  display: flex;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 45px rgba(0,0,0,0.35);
+  animation: popIn .3s ease;
+}
+
+.popup-image-container {
+  flex: 1;
+  background: #000;
+}
+
+.popup-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.popup-details {
+  flex: 1.2;
+  padding: 2rem;
+}
+
+.popup-details h2 {
+  font-size: 1.8rem;
+  margin-bottom: .3rem;
+  color: #4f46e5;
+}
+
+.popup-details p {
+  font-size: 1rem;
+  margin: .4rem 0;
+  color: #333;
+  line-height: 1.5;
+}
+
+.popup-details ul {
+  margin-top: .5rem;
+  padding-left: 1.2rem;
+}
+
+.popup-details ul li {
+  margin-bottom: .4rem;
+}
+
+.popup-price {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #4f46e5;
+  margin-top: 1rem;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.8rem;
+}
+
+.popup-buttons button {
+  flex: 1;
+  padding: .9rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+#homeBookRoomBtn {
+  background: #4f46e5;
+  color: #fff;
+}
+
+#homeBookRoomBtn:hover {
+  background: #4338ca;
+}
+
+#homeClosePopupBtn {
+  background: #e5e7eb;
+  color: #333;
+}
+
+#homeClosePopupBtn:hover {
+  background: #d1d5db;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Popup-specific override so Book Now matches card button */
+.room-popup .popup-buttons .book-btn {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    font-family: inherit;
+    padding: 12px 0;
+    width: 48%;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Close button styles */
+.room-popup .popup-buttons .close-btn {
+    background: #e5e7eb;
+    color: #333;
+    border: none;
+    font-family: inherit;
+    padding: 12px 0;
+    width: 48%;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Align popup buttons properly */
+.popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+/* Force popup buttons to behave identically */
+.room-popup .popup-buttons button {
+    width: 48% !important;
+    padding: 14px 0 !important;
+    border-radius: 10px !important;
+    font-size: 16px !important;
+    font-weight: 500;
+    display: inline-block !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+}
+
+/* Book Now button inside popup */
+.room-popup .popup-buttons .book-btn {
+    background: #4f46e5 !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* Close button inside popup */
+.room-popup .popup-buttons .close-btn {
+    background: #e5e7eb !important;
+    color: #333 !important;
+    border: none !important;
+}
+
+/* Align them perfectly side-by-side */
+.popup-buttons {
+    display: flex !important;
+    gap: 15px !important;
+    justify-content: space-between !important;
+}
+
+/* Shared styling for both popup buttons */
+.room-popup .popup-buttons button {
+    width: 48%;
+    padding: 12px 0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    box-sizing: border-box;
+}
+
+/* Match EXACT styling of outside room-card book buttons */
+.room-popup .popup-buttons .book-btn {
+    background: #4f46e5;        /* SAME PURPLE */
+    color: white;
+    border: none;
+    font-family: inherit;        /* SAME FONT as outside */
+}
+
+/* Match Close button style */
+.room-popup .popup-buttons .close-btn {
+    background: #e5e7eb;
+    color: #333;
+    border: none;
+    font-family: inherit;        /* SAME FONT */
+}
+
+/* Keep them aligned */
+.popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+/* =====================================================
+   📱 HOME PAGE - COMPLETE MOBILE RESPONSIVE STYLING
+   ===================================================== */
+
+/* ================= TABLET + MOBILE ================= */
+@media (max-width: 900px) {
+
+  /* ===== HEADER ===== */
+  header {
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    gap: 0.6rem;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    height: auto;
+    padding: 3rem 1.2rem;
+  }
+
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 2.2rem;
+  }
+
+  .hero-left,
+  .hero-right {
+    align-items: center;
+  }
+
+  .hero-right h1 {
+    font-size: 1.7rem;
+    line-height: 1.4;
+    letter-spacing: 1px;
+  }
+
+  .oval-logo {
+    padding: 15px 25px;
+  }
+
+  .oval-logo img {
+    width: 90px;
+  }
+
+  /* ===== ROOMS GRID (2 COLUMNS) ===== */
+  .rooms-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    justify-items: center;
+  }
+
+  .room-card {
+    width: 100%;
+    max-width: 360px;
+  }
+
+  /* If 3 cards → center the last */
+  .rooms-container .room-card:nth-last-child(1):nth-child(odd) {
+    grid-column: 1 / 3;
+    justify-self: center;
+    width: 70%;
+  }
+
+
+  /* ===== AMENITIES GRID (2 COLUMNS) ===== */
+  .outdoor-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    justify-items: center;
+  }
+
+  .amenity-card {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  /* If 3 amenities → center the last */
+  .outdoor-container .amenity-card:nth-last-child(1):nth-child(odd) {
+    grid-column: 1 / 3;
+    justify-self: center;
+    width: 70%;
+  }
+
+  /* FOOTER */
+  footer {
+    font-size: 0.85rem;
+    padding: 1.2rem;
+  }
+}
+
+
+/* ================= SMALL PHONES ================= */
+@media (max-width: 480px) {
+
+  /* HERO TEXT */
+  .hero-right h1 {
+    font-size: 1.4rem;
+  }
+
+  .oval-logo img {
+    width: 80px;
+  }
+
+  /* ROOMS - keep 2 columns but tighter */
+  .rooms-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .room-card {
+    max-width: 100%;
+  }
+
+  /* If odd, center final card */
+  .rooms-container .room-card:nth-last-child(1):nth-child(odd) {
+    width: 85%;
+  }
+
+  /* AMENITIES */
+  .outdoor-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .amenity-card {
+    max-width: 100%;
+  }
+
+  .outdoor-container .amenity-card:nth-last-child(1):nth-child(odd) {
+    width: 85%;
+  }
+
+  /* BUTTONS */
+  .book-btn,
+  .cta-btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+
+  /* POPUPS */
+  .room-popup {
+    flex-direction: column;
+    width: 95%;
+  }
+
+  .popup-image-container {
+    height: 200px;
+  }
+
+  .popup-details {
+    padding: 1.3rem;
+  }
+
+  .popup-buttons {
+    flex-direction: column;
+  }
+
+  .popup-buttons button {
+    width: 100% !important;
+  }
+}
+
+/* ===========================
+   CLEAN PROFILE ICON AVATAR
+=========================== */
+
+.profile-wrapper {
+  position: relative;
+}
+
+/* Perfect circle button */
+.avatar-circle {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #444;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  color: #444; /* icon color */
+}
+
+.avatar-circle:hover {
+  background: rgba(90, 90, 255, 0.08);
+  transform: scale(1.05);
+}
+
+/* SVG icon inside */
+.avatar-svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* NAV ALIGN FIX (important) */
+nav ul {
+  display: flex;
+  align-items: center;
+}
+
+/* Dropdown menu remains same */
+.profile-dropdown {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: white;
+  border-radius: 10px;
+  min-width: 140px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.profile-dropdown.show {
+  display: flex;
+}
+
+.profile-dropdown a {
+  padding: 0.7rem 1rem;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.profile-dropdown a:hover {
+  background: #f3f4f6;
+}
+
+/* NAV FIX - FORCE PERFECT VERTICAL ALIGNMENT */
+nav ul {
+  display: flex;
+  align-items: center;   /* ✅ THIS CENTERS EVERYTHING VERTICALLY */
+  gap: 1.5rem;
+}

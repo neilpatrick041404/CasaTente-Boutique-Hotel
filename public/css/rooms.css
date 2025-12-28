@@ -1,0 +1,862 @@
+/* ====== GENERAL ====== */
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  color: #222;
+  min-height: 100vh;
+  background: url("../images/hotel-bg.jpg") no-repeat center center/cover;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+/* Blurred overlay */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 0;
+}
+
+/* Keep visible content above overlay */
+header,
+.rooms-section,
+footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== HEADER ===== */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 3rem;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-sizing: border-box;
+  backdrop-filter: blur(6px);
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #333;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover,
+nav a.active {
+  color: #4f46e5;
+}
+
+/* ===== LOGIN / LOGOUT BUTTONS (MATCH NAV LINKS) ===== */
+#loginBtn,
+#logoutBtn {
+  background: none;
+  color: #444;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+#loginBtn:hover,
+#logoutBtn:hover {
+  color: #4f46e5;
+}
+
+/* ====== ROOMS SECTION ====== */
+.rooms-section {
+  position: relative;
+  text-align: center;
+  padding: 4rem 2rem;
+  color: white;
+  min-height: 100vh;
+  z-index: 1;
+}
+
+.rooms-section h2 {
+  font-size: 2rem;
+  margin-bottom: 2.5rem;
+  letter-spacing: 1px;
+  color: #fff;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.category-title {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 1px;
+  margin: 3rem 0 1.2rem;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
+}
+
+/* GRID LAYOUT */
+.rooms-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ROOM CARD */
+.room-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+}
+
+.room-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.room-card h3 {
+  margin: 1rem;
+  color: #111;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.room-card p {
+  margin: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+.price {
+  display: block;
+  margin: 0.8rem 1rem;
+  color: #4f46e5;
+  font-weight: 600;
+}
+
+/* BOOK NOW BUTTON */
+.book-btn {
+  display: inline-block;
+  background: #4f46e5;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin: 0 1rem 1.2rem;
+}
+
+.book-btn:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+}
+
+/* ===== FOOTER (MATCH ABOUT & AMENITIES DESIGN) ===== */
+footer {
+  text-align: center;
+  color: white;
+  font-size: 0.85rem;
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+  opacity: 0.9;
+  background: rgba(0, 0, 0, 0.55);
+  width: 100%;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .rooms-section {
+    padding: 2rem 1rem;
+  }
+
+  .room-card img {
+    height: 160px;
+  }
+
+  .room-card h3 {
+    font-size: 1.1rem;
+  }
+}
+
+/* ===== LOGIN POPUP ===== */
+.login-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.popup-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 0.3s ease;
+}
+
+.popup-content h3 {
+  color: #4f46e5;
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.popup-content p {
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.popup-actions button {
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#goLogin {
+  background: #4f46e5;
+  color: white;
+}
+#goLogin:hover {
+  background: #4338ca;
+}
+
+#cancelLogin {
+  background: #e5e7eb;
+  color: #333;
+}
+#cancelLogin:hover {
+  background: #d1d5db;
+}
+
+/* ===== LOGOUT POPUP ===== */
+.logout-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 3000;
+}
+
+.logout-popup.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.logout-popup-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 0.3s ease;
+}
+
+.logout-popup-box h3 {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.logout-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.logout-actions button {
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#confirmLogout {
+  background: #ef4444;
+  color: #fff;
+}
+#confirmLogout:hover {
+  background: #dc2626;
+}
+
+#cancelLogout {
+  background: #e5e7eb;
+  color: #333;
+}
+#cancelLogout:hover {
+  background: #d1d5db;
+}
+
+/* ===== SUCCESS POPUP (AFTER LOGOUT) ===== */
+.success-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 4000;
+}
+
+.success-popup.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.success-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: popIn 0.3s ease;
+}
+
+.success-box h3 {
+  font-size: 1.1rem;
+  color: #16a34a;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #4f46e5, #22c55e);
+  transition: width 2s linear;
+  border-radius: 10px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ================================
+   ROOM DETAILS POPUP (NEW FEATURE)
+   ================================ */
+
+.room-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(6px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.room-popup-overlay.show {
+  display: flex;
+  opacity: 1;
+}
+
+.room-popup {
+  background: #fff;
+  width: 850px;
+  max-width: 95%;
+  display: flex;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  animation: popIn .3s ease;
+}
+
+.popup-image-container {
+  flex: 1;
+  background: #000;
+}
+.popup-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.popup-details {
+  flex: 1.2;
+  padding: 1.8rem;
+  overflow-y: auto;
+}
+
+.popup-details h2 {
+  margin: 0 0 .5rem;
+  font-size: 1.6rem;
+  color: #4f46e5;
+}
+
+.popup-price {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  color: #4f46e5;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.8rem;
+  gap: 1rem;
+}
+
+.popup-buttons button {
+  flex: 1;
+  padding: .9rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+#bookRoomBtn {
+  background: #4f46e5;
+  color: #fff;
+}
+#bookRoomBtn:hover {
+  background: #4338ca;
+}
+
+.close-btn {
+  background: #e5e7eb;
+}
+.close-btn:hover {
+  background: #d1d5db;
+}
+
+.room-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Wrap text parts in a flex area */
+.room-card h3,
+.room-card p,
+.price {
+  flex-shrink: 0;
+}
+
+/* Make description area flexible */
+.room-card p:nth-of-type(2) {
+  flex-grow: 1;
+}
+
+/* Keep button always at bottom */
+.book-btn {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.book-btn {
+  display: block;
+  background: #4f46e5;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin: 0 auto 1.2rem auto; /* centers the button horizontally */
+  margin-top: auto; /* pushes button to bottom */
+}
+
+.book-btn:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+}
+
+.room-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.room-card h3 {
+  margin: 0.8rem 1rem 0.3rem; /* tighter spacing below the room name */
+  color: #111;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.room-card p {
+  margin: 0.3rem 1rem; /* reduce top and bottom margins for all paragraphs */
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+/* keep the description flexible so button stays aligned at the bottom */
+.room-card p:nth-of-type(2) {
+  flex-grow: 1;
+}
+
+/* ================================
+   ROOM DETAILS POPUP (MATCH ROOMS PAGE)
+   ================================ */
+
+.room-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(6px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.room-popup-overlay.show {
+  display: flex;
+  opacity: 1;
+}
+
+.room-popup {
+  background: #ffffff;
+  width: 850px;
+  max-width: 95%;
+  display: flex;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 45px rgba(0,0,0,0.35);
+  animation: popIn .3s ease;
+}
+
+.popup-image-container {
+  flex: 1;
+  background: #000;
+}
+
+.popup-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.popup-details {
+  flex: 1.2;
+  padding: 2rem;
+}
+
+.popup-details h2 {
+  font-size: 1.8rem;
+  margin-bottom: .3rem;
+  color: #4f46e5;
+}
+
+.popup-details p {
+  font-size: 1rem;
+  margin: .4rem 0;
+  color: #333;
+  line-height: 1.5;
+}
+
+.popup-details ul {
+  margin-top: .5rem;
+  padding-left: 1.2rem;
+}
+
+.popup-details ul li {
+  margin-bottom: .4rem;
+}
+
+.popup-price {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #4f46e5;
+  margin-top: 1rem;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.8rem;
+}
+
+.popup-buttons button {
+  flex: 1;
+  padding: .9rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+#homeBookRoomBtn {
+  background: #4f46e5;
+  color: #fff;
+}
+
+#homeBookRoomBtn:hover {
+  background: #4338ca;
+}
+
+#homeClosePopupBtn {
+  background: #e5e7eb;
+  color: #333;
+}
+
+#homeClosePopupBtn:hover {
+  background: #d1d5db;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Force popup buttons to behave identically */
+.room-popup .popup-buttons button {
+    width: 48% !important;
+    padding: 14px 0 !important;
+    border-radius: 10px !important;
+    font-size: 16px !important;
+    font-weight: 500;
+    display: inline-block !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+}
+
+/* Book Now button inside popup */
+.room-popup .popup-buttons .book-btn {
+    background: #4f46e5 !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* Close button inside popup */
+.room-popup .popup-buttons .close-btn {
+    background: #e5e7eb !important;
+    color: #333 !important;
+    border: none !important;
+}
+
+/* Align them perfectly side-by-side */
+.popup-buttons {
+    display: flex !important;
+    gap: 15px !important;
+    justify-content: space-between !important;
+}
+
+/* Shared styling for both popup buttons */
+.room-popup .popup-buttons button {
+    width: 48%;
+    padding: 12px 0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    box-sizing: border-box;
+}
+
+/* Match EXACT styling of outside room-card book buttons */
+.room-popup .popup-buttons .book-btn {
+    background: #4f46e5;        /* SAME PURPLE */
+    color: white;
+    border: none;
+    font-family: inherit;        /* SAME FONT as outside */
+}
+
+/* Match Close button style */
+.room-popup .popup-buttons .close-btn {
+    background: #e5e7eb;
+    color: #333;
+    border: none;
+    font-family: inherit;        /* SAME FONT */
+}
+
+/* Keep them aligned */
+.popup-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+/* ===========================
+   CLEAN PROFILE ICON AVATAR
+=========================== */
+
+.profile-wrapper {
+  position: relative;
+}
+
+/* Perfect circle button */
+.avatar-circle {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #444;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  color: #444; /* icon color */
+}
+
+.avatar-circle:hover {
+  background: rgba(90, 90, 255, 0.08);
+  transform: scale(1.05);
+}
+
+/* SVG icon inside */
+.avatar-svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* NAV ALIGN FIX (important) */
+nav ul {
+  display: flex;
+  align-items: center;
+}
+
+/* Dropdown menu remains same */
+.profile-dropdown {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: white;
+  border-radius: 10px;
+  min-width: 140px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.profile-dropdown.show {
+  display: flex;
+}
+
+.profile-dropdown a {
+  padding: 0.7rem 1rem;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.profile-dropdown a:hover {
+  background: #f3f4f6;
+}
+
+/* NAV FIX - FORCE PERFECT VERTICAL ALIGNMENT */
+nav ul {
+  display: flex;
+  align-items: center;   /* ✅ THIS CENTERS EVERYTHING VERTICALLY */
+  gap: 1.5rem;
+}

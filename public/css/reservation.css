@@ -1,0 +1,1134 @@
+/* ===== GLOBAL STYLES ===== */
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: url("../images/hotel-bg.jpg") no-repeat center center/cover;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+/* ===== BLUR OVERLAY ===== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Make content appear above blur */
+header, .reservation-section, footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== HEADER ===== */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 3rem;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(6px);
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #333;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover,
+nav a.active {
+  color: #4f46e5;
+}
+
+/* ===== LOGOUT BUTTON STYLE ===== */
+#logoutBtn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #444;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+#logoutBtn:hover {
+  color: #ef4444;
+}
+
+/* ===== RESERVATION SECTION ===== */
+.reservation-section {
+  max-width: 1100px;
+  margin: 3rem auto;
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3rem;
+  color: #333;
+}
+
+/* ===== ROOM DETAILS ===== */
+.room-image {
+  text-align: center;
+  max-width: 420px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start; /* ✅ prevents flex stretching */
+}
+
+.room-image img {
+  width: 100%;
+  height: 260px;            /* ✅ hard fixed height */
+  object-fit: cover;        /* ✅ crops instead of stretches */
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.room-image h2 {
+  font-size: 1.7rem;
+  margin: 0.4rem 0;
+}
+
+.room-image p {
+  font-size: 1rem;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+/* ===== RESERVATION FORM ===== */
+.reservation-form {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1.8rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  color: #333;
+}
+
+.reservation-form h3 {
+  text-align: center;
+  color: #4f46e5;
+  margin-bottom: 1rem;
+}
+
+/* ===== INPUTS ===== */
+label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #333;
+  margin-top: 0.8rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.65rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #4f46e5;
+  outline: none;
+}
+
+/* ===== DATE ROW ===== */
+.date-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.date-row div {
+  flex: 1;
+}
+
+/* ===== TOTAL PRICE ===== */
+#totalPrice {
+  font-weight: 700;
+  color: #333;
+  margin-top: 0.8rem;
+}
+
+/* ===== BUTTON ===== */
+button {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1.2rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  color: #fff;
+  font-size: 0.85rem;
+  opacity: 0.9;
+  padding: 1.5rem 0;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  margin-top: 2rem;
+}
+
+/* ===== LOGIN/LOGOUT/SUCCESS POPUPS ===== */
+.login-popup,
+.logout-popup,
+.success-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(5px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 999999;
+}
+
+.login-popup.show,
+.logout-popup.show,
+.success-popup.show {
+  display: flex;
+  opacity: 1;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* ===== POPUP CONTENT ===== */
+.popup-content,
+.logout-popup-box,
+.success-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  animation: popIn 0.3s ease forwards;
+}
+
+.popup-content h3,
+.logout-popup-box h3,
+.success-box h3 {
+  color: #4f46e5;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.popup-content p {
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ===== POPUP BUTTONS ===== */
+.popup-actions,
+.logout-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.popup-actions button,
+.logout-actions button {
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+/* Blue for login restriction */
+#goLogin {
+  background: #4f46e5;
+  color: white;
+}
+#goLogin:hover {
+  background: #4338ca;
+}
+
+/* Red for logout confirm */
+#confirmLogout {
+  background: #ef4444;
+  color: #fff;
+}
+#confirmLogout:hover {
+  background: #dc2626;
+}
+
+/* Neutral cancel */
+#cancelLogin,
+#cancelLogout {
+  background: #e5e7eb;
+  color: #333;
+}
+#cancelLogin:hover,
+#cancelLogout:hover {
+  background: #d1d5db;
+}
+
+/* ===== SUCCESS POPUP ===== */
+.success-box h3 {
+  color: #16a34a;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #4f46e5, #22c55e);
+  border-radius: 10px;
+  transition: width 2s linear;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1rem 1.5rem;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .reservation-section {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .reservation-form {
+    width: 90%;
+  }
+
+  .room-image img {
+    width: 90%;
+  }
+}
+
+/* ===== GLOBAL LOGOUT POPUP ===== */
+.logout-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(5px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.logout-popup.show {
+  display: flex;
+  opacity: 1;
+}
+
+.logout-popup-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+.logout-popup-box h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.logout-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.logout-actions button {
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+#confirmLogout {
+  background: #ef4444;
+  color: white;
+}
+
+#confirmLogout:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+}
+
+#cancelLogout {
+  background: #e5e7eb;
+  color: #333;
+}
+
+#cancelLogout:hover {
+  background: #d1d5db;
+  transform: translateY(-2px);
+}
+
+/* Success popup for logout */
+.success-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.success-popup.show {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+.success-box {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.success-box h3 {
+  color: #16a34a;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #4f46e5, #22c55e);
+  transition: width 2s linear;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ===== FIXED POPUP LAYER FOR RESERVATION PAGES ===== */
+.logout-popup,
+.login-popup,
+.success-popup {
+  position: fixed !important;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(5px);
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 999999 !important;
+}
+
+.logout-popup.show,
+.login-popup.show,
+.success-popup.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.logout-popup-box,
+.popup-content,
+.success-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 0.3s ease;
+  z-index: 100000 !important;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===========================
+   🎨 DATE INPUT VISUAL HIGHLIGHTS
+   =========================== */
+
+/* Smooth background transition */
+input[type="date"] {
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Subtle color tints based on reservation status (handled by JS) */
+input[type="date"].pending {
+  background: rgba(255, 215, 0, 0.25); /* 🟡 yellow tint for pending */
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.3);
+}
+
+input[type="date"].confirmed {
+  background: rgba(144, 238, 144, 0.25); /* 🟢 light green for confirmed */
+  box-shadow: 0 0 0 2px rgba(144, 238, 144, 0.3);
+}
+
+input[type="date"].cancelled {
+  background: rgba(255, 99, 71, 0.25); /* 🔴 light red for cancelled */
+  box-shadow: 0 0 0 2px rgba(255, 99, 71, 0.3);
+}
+
+input[type="date"]:hover {
+  cursor: pointer;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.3);
+}
+
+/* Reset state */
+input[type="date"].available {
+  background: #fff;
+  box-shadow: none;
+}
+
+/* Tooltip visual hint for booked dates */
+input[type="date"]::placeholder {
+  color: #666;
+  opacity: 0.8;
+}
+
+/* 🛑 Mark unavailable date inputs subtly */
+input.booked-blocked {
+  background-color: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #555;
+  transition: all 0.3s ease;
+}
+
+input.booked-blocked::placeholder {
+  color: #999;
+}
+
+/* 🌙 Flatpickr custom theme (match your hotel style) */
+.flatpickr-calendar {
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange {
+  background: #4f46e5;
+  color: white;
+}
+
+.flatpickr-day.today {
+  border-color: #4f46e5;
+}
+
+.flatpickr-day.disabled,
+.flatpickr-day.notAllowed {
+  color: #aaa !important;
+  background: #f5f5f5 !important;
+  cursor: not-allowed !important;
+}
+
+/* ===== Flatpickr Disabled Dates Highlight ===== */
+.flatpickr-disabled-day {
+  color: #999 !important;
+  cursor: not-allowed !important;
+  text-decoration: line-through;
+  border-radius: 50%;
+}
+
+/* ===== Highlight Disabled (Booked) Days ===== */
+.flatpickr-disabled-day {
+  color: #999 !important;
+  cursor: not-allowed !important;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.flatpickr-disabled-day:hover {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ==========================================================
+   ✅ SUCCESS POPUP (Reservation Confirmation)
+   ========================================================== */
+.success-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+}
+
+.success-popup.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.success-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: popIn 0.3s ease;
+  color: #111827;
+}
+
+.success-box h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #16a34a; /* green success color */
+  margin-bottom: 0.6rem;
+}
+
+.success-box p {
+  font-size: 0.95rem;
+  color: #374151;
+  margin-bottom: 1rem;
+}
+
+/* Progress bar under success message */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.progress {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #4f46e5, #22c55e);
+  border-radius: 10px;
+  transition: width 2s linear;
+}
+
+/* Popup animation */
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== Reservation Popup (in-page) ===== */
+.reservation-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 99999;
+}
+.reservation-popup.show {
+  opacity: 1;
+  pointer-events: all;
+}
+.reservation-popup .popup-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  animation: popIn 0.3s ease;
+}
+.reservation-popup.success h3 { color: #16a34a; }
+.reservation-popup.error h3 { color: #dc2626; }
+.reservation-popup .progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+.reservation-popup .progress {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg,#4f46e5,#22c55e);
+  transition: width 2s linear;
+}
+
+/* ======================================================
+   ✅ RESERVATION SUCCESS POPUP (MATCHES LOGOUT DESIGN)
+   ====================================================== */
+.reservation-popup {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 99999;
+}
+
+.reservation-popup.show {
+  opacity: 1;
+  pointer-events: all;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.reservation-popup .popup-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  animation: popIn 0.3s ease;
+  color: #111827;
+}
+
+.popup-card .popup-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.popup-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #16a34a;
+  margin-bottom: 0.4rem;
+}
+
+.popup-card p {
+  font-size: 0.95rem;
+  color: #374151;
+  margin-bottom: 1.2rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #4f46e5, #22c55e);
+  border-radius: 10px;
+  transition: width 2s linear;
+}
+
+/* Smooth animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes popIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ===== FIXED POPUP LAYER FOR RESERVATION PAGES (FIXED) ===== */
+.logout-popup,
+.login-popup,
+.success-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(5px);
+  display: none; /* ✅ Hidden by default */
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 999999;
+}
+
+.logout-popup.show,
+.login-popup.show,
+.success-popup.show {
+  display: flex; /* ✅ Shown when JS adds .show */
+  opacity: 1;
+  pointer-events: all;
+}
+
+.logout-popup {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.logout-popup.show {
+  display: flex;
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ✅ Working logout popup CSS */
+.logout-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(5px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+}
+
+.logout-popup.show {
+  display: flex;
+  opacity: 1;
+  pointer-events: all;
+}
+
+.logout-popup-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+.logout-popup-box h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+/* =========================================================
+   ✅ LOGOUT POPUP ONLY (Copied from Amenities Page)
+   ========================================================= */
+.logout-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(5px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 9999999; /* 🟢 Always above background blur */
+  pointer-events: all;
+}
+
+.logout-popup.show {
+  display: flex;
+  opacity: 1;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* ===== POPUP BOX STYLING ===== */
+.logout-popup-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  animation: popIn 0.3s ease forwards;
+  color: #333;
+  z-index: 10000000; /* 🟢 Ensures popup above overlay */
+}
+
+.logout-popup-box h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1.2rem;
+}
+
+/* ===== LOGOUT POPUP BUTTONS ===== */
+.logout-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+.logout-actions button {
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+/* Confirm logout = red button */
+#confirmLogout {
+  background: #ef4444;
+  color: #fff;
+}
+#confirmLogout:hover {
+  background: #dc2626;
+}
+
+/* Cancel logout = gray button */
+#cancelLogout {
+  background: #e5e7eb;
+  color: #333;
+}
+#cancelLogout:hover {
+  background: #d1d5db;
+}
+
+/* ===== POPUP ANIMATIONS ===== */
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Fix amenities alignment */
+.amenities-wrapper {
+  text-align: left !important;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+
+.amenities-wrapper h4 {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+#reservationAmenities {
+  margin: 0;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+#reservationAmenities li {
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.discount-note {
+  font-size: 0.85rem;
+  color: #6b7280; /* soft gray */
+  margin-top: 0.4rem;
+  font-style: italic;
+}
+
+/* ===========================
+   CLEAN PROFILE ICON AVATAR
+=========================== */
+
+.profile-wrapper {
+  position: relative;
+}
+
+/* Perfect circle button */
+.avatar-circle {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #444;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  color: #444; /* icon color */
+}
+
+.avatar-circle:hover {
+  background: rgba(90, 90, 255, 0.08);
+  transform: scale(1.05);
+}
+
+/* SVG icon inside */
+.avatar-svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* NAV ALIGN FIX (important) */
+nav ul {
+  display: flex;
+  align-items: center;
+}
+
+/* Dropdown menu remains same */
+.profile-dropdown {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: white;
+  border-radius: 10px;
+  min-width: 140px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.profile-dropdown.show {
+  display: flex;
+}
+
+.profile-dropdown a {
+  padding: 0.7rem 1rem;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.profile-dropdown a:hover {
+  background: #f3f4f6;
+}
+
+/* NAV FIX - FORCE PERFECT VERTICAL ALIGNMENT */
+nav ul {
+  display: flex;
+  align-items: center;   /* ✅ THIS CENTERS EVERYTHING VERTICALLY */
+  gap: 1.5rem;
+}

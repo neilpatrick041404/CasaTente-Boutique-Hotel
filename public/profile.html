@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Profile | Casa Tente Boutique Hotel</title>
+  <link rel="stylesheet" href="css/profile.css" />
+</head>
+<body>
+  <!-- HEADER (same structure as other pages) -->
+  <header>
+    <div class="logo">CasaTente Boutique Hotel</div>
+
+    <nav>
+      <ul>
+        <li><a href="/home-page">Home</a></li>
+        <li><a href="/rooms-page">Rooms</a></li>
+        <li><a href="/amenities-page">Amenities</a></li>
+        <li><a href="/about-page">About</a></li>
+        <li><a href="/contact-page">Contact</a></li>
+
+        <!-- Profile avatar (same as others) -->
+        <li>
+          <div class="profile-wrapper">
+            <button id="profileAvatar" class="avatar-circle" aria-label="Profile menu">
+              <svg class="avatar-svg" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </button>
+
+            <div id="profileDropdown" class="profile-dropdown">
+                <a href="/profile-page" id="profileLink">Profile</a>
+                <a href="#" id="historyLink">History</a>
+                <a href="#" id="logoutProfileBtn">Logout</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN PROFILE SECTION -->
+  <section class="profile-section">
+    <div class="profile-card">
+
+        <h2 class="profile-title">My Profile</h2>
+
+        <div class="profile-content">
+
+        <div class="profile-grid">
+
+            <div class="profile-field">
+            <span class="label">Full Name</span>
+            <span class="value" id="displayName"></span>
+            </div>
+
+            <div class="profile-field">
+            <span class="label">Email</span>
+            <span class="value" id="displayEmail"></span>
+            </div>
+
+        </div>
+
+        <div class="profile-row profile-field">
+            <span class="label">Contact Number</span>
+            <span class="value" id="displayContact"></span>
+        </div>
+
+        <div class="profile-actions">
+            <button class="btn primary" id="editBtn">Edit Profile</button>
+            <button class="btn primary" id="changePasswordBtn">Change Password</button>
+        </div>
+
+        </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER (optional but keeps layout consistent) -->
+  <footer>
+    © 2025 Casa Tente Boutique Hotel | Matnog, Sorsogon
+  </footer>
+
+  <!-- POPUP for editing profile -->
+  <div class="profile-popup" id="editProfilePopup">
+    <div class="profile-popup-box">
+      <h3>Edit Profile</h3>
+      <p id="requiredFieldsMsg" style="color:red; text-align:center; font-size:0.9rem; display:none;">
+        Input all needed fields.
+      </p>
+      <form id="profileForm">
+
+        <label for="firstNameInput">First Name</label>
+        <input type="text" id="firstNameInput" ...>
+
+        <label for="middleNameInput">Middle Name (optional)</label>
+        <input type="text" id="middleNameInput" ...>
+
+        <label for="lastNameInput">Last Name</label>
+        <input type="text" id="lastNameInput" ...>
+
+        <label for="emailInput">Email</label>
+        <input type="text" id="emailInput" autocomplete="email">
+        <p id="emailError" style="color:red; font-size:0.9rem; margin-top:4px; display:none;"></p>
+
+        <label for="contactInput">Contact Number</label>
+        <input type="tel" id="contactInput" ...>
+        <p id="contactError" style="color:red; font-size:0.9rem; margin-top:4px; display:none;"></p>
+
+        <div class="popup-actions">
+            <button type="submit" class="btn primary">Save Changes</button>
+            <button type="button" id="cancelEditProfile" class="btn secondary">Cancel</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- POPUP 1 — verify current password -->
+  <div class="profile-popup" id="passwordPopup">
+    <div class="profile-popup-box">
+      <h3>Change Password</h3>
+
+      <p id="pwStep1Required" class="error-top">Input all fields.</p>
+
+      <label id="labelCurrentPw" for="currentPassword">Current Password</label>
+      <input type="password" id="currentPassword">
+
+      <p id="passwordError" class="error-msg"></p>
+
+      <div class="popup-actions">
+        <button id="nextPassword" class="btn primary">Next</button>
+        <button id="cancelPassword" class="btn secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- POPUP 2 — set new password -->
+  <div class="profile-popup" id="newPasswordPopup">
+    <div class="profile-popup-box">
+      <h3>Set New Password</h3>
+
+      <p id="pwStep2Required" class="error-top">Input all fields.</p>
+
+      <label id="labelNewPw" for="newPw">New Password</label>
+      <input type="password" id="newPw">
+
+      <!-- RULE ERROR -->
+      <p id="newPwRuleError" class="error-msg"></p>
+
+      <label id="labelConfirmPw" for="confirmPw">Confirm New Password</label>
+      <input type="password" id="confirmPw">
+
+      <!-- MISMATCH ERROR -->
+      <p id="confirmPwError" class="error-msg"></p>
+
+      <div class="popup-actions">
+        <button id="submitNewPw" class="btn primary">Update Password</button>
+        <button id="cancelNewPw" class="btn secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- POPUP for email re-verification when email is changed -->
+  <div class="profile-popup" id="emailVerifyPopup">
+    <div class="profile-popup-box">
+      <h3>Email Verification Required</h3>
+      <p>
+        We’ve sent a verification code to your new email.
+        Please check your inbox and enter the OTP below.
+      </p>
+
+      <form id="emailOtpForm">
+        <label>Enter OTP</label>
+        <input type="text" id="emailOtpInput" maxlength="6" inputmode="numeric" pattern="[0-9]*" style="text-align:center;" required />
+        <p id="otpError" style="color:red; font-size:0.85rem; margin-top:4px; display:none;"></p>
+
+        <div class="popup-actions">
+          <button type="submit" class="btn primary">Verify Email</button>
+          <button type="button" id="cancelEmailVerify" class="btn secondary">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ✅ Profile Update Success Popup -->
+  <div class="profile-success-popup" id="profileSuccessPopup">
+    <div class="success-box">
+
+        <!-- These IDs are REQUIRED for showPasswordSuccess() -->
+        <h3 id="successTitle">✅ Profile Updated</h3>
+        <p id="successMessage">Your profile has been successfully updated.</p>
+
+        <div class="progress-bar">
+          <div class="progress" id="profileProgress"></div>
+        </div>
+
+    </div>
+  </div>
+
+  <!-- GLOBAL SUCCESS / INFO POPUP (used by showPopup) -->
+  <div id="popupMessage" class="global-popup" style="display:none;">
+    <div class="popup-box">
+      <h3 id="popupTitle"></h3>
+      <p id="popupText"></p>
+    </div>
+  </div>
+
+  <!-- Global auth logic (avatar, login popup, etc.) -->
+  <script src="js/auth-check.js"></script>
+  <!-- Profile logic (loads user, edit, change password, email OTP) -->
+  <script src="js/profile.js"></script>
+</body>
+</html>

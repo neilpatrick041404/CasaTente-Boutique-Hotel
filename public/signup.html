@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casa Tente Hotel | Sign Up</title>
+  <link rel="stylesheet" href="css/signup.css">
+</head>
+
+<body>
+  <div class="center-wrap">
+    <div class="signup-box">
+      <h2>Create your account</h2>
+      <form id="signupForm">
+        <!-- Name Fields -->
+        <label>Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+
+        <label>Surname</label>
+        <input type="text" id="surname" placeholder="Enter your surname" required>
+
+        <label>Middle Name (optional)</label>
+        <input type="text" id="middle" placeholder="Enter your middle name">
+
+        <!-- Contact Number -->
+        <label>Contact Number</label>
+
+        <div class="phone-input">
+          <span class="prefix">+63</span>
+          <input
+            type="tel"
+            id="contact"
+            name="contact"
+            placeholder="9123456789"
+            maxlength="10"
+            inputmode="numeric"
+            required
+          />
+        </div>
+
+        <!-- Email -->
+        <label>Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email address" required>
+
+        <!-- Password -->
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required>
+
+        <!-- Confirm Password -->
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+
+        <!-- ❌ Password Hint Removed -->
+        <!-- It’s now fully handled by signup.js -->
+
+        <!-- Sign Up -->
+        <button type="submit">Sign Up</button>
+      </form>
+
+      <div class="divider"></div>
+
+      <p class="terms">
+        By signing up, you agree to our 
+        <a href="#">Terms & Conditions</a> and 
+        <a href="#">Privacy Policy</a>.
+      </p>
+
+      <!-- 🔹 Verify Account Link (below “Log in here”) -->
+      <p style="text-align:center; margin-top:0.8rem;">
+        Already have an account? <a href="/login-page">Log in here</a><br>
+        <a href="#" id="verifyAccountLink" style="color:#4f46e5; cursor:pointer;">Verify Account</a>
+      </p>
+
+      <p class="footer">&copy; 2025 CasaTenteHotel.com</p>
+    </div>
+  </div>
+        <!-- 🔹 Verify Email Popup -->
+  <div id="verifyEmailPopup" class="popup-overlay">
+    <div class="popup-box">
+      <h3>Verify Your Account</h3>
+      <p>Enter your registered email to receive an OTP verification code.</p>
+
+      <input type="email" id="verifyEmailInput" placeholder="Enter your email address" required style="width:100%; padding:0.65rem; border:1px solid #ccc; border-radius:8px; margin-top:0.5rem;">
+      <p id="verifyEmailError" style="color:red; font-size:0.9rem; margin-top:0.4rem;"></p>
+
+      <div style="margin-top:1rem; display:flex; justify-content:center; gap:1rem;">
+        <button id="sendVerifyOtpBtn" style="background:#4f46e5;color:white;border:none;padding:0.7rem 1.4rem;border-radius:8px;cursor:pointer;">Send OTP</button>
+        <button id="closeVerifyPopup" style="background:#e5e7eb;color:#333;border:none;padding:0.7rem 1.4rem;border-radius:8px;cursor:pointer;">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🟣 OTP Verification Modal -->
+  <div class="otp-modal" id="otpModal">
+    <div class="otp-box">
+      <h3>Enter OTP</h3>
+      <p>We’ve sent a verification code to your email.</p>
+
+      <input type="text" id="otpInput" maxlength="6" placeholder="Enter 6-digit OTP" />
+
+      <!-- ✅ Side-by-side buttons -->
+      <div class="otp-buttons">
+        <button id="verifyOtpBtn" class="verify-btn">Verify OTP</button>
+        <button id="closeOtpBtn" class="cancel-btn">Cancel</button>
+      </div>
+
+      <p class="resend-text">
+        Didn’t get the code?
+        <button id="resendSignupOtpBtn">Resend OTP (60s)</button>
+      </p>
+    </div>
+  </div>
+
+  <!-- ✅ Registration Success Pop-up -->
+  <div class="popup-overlay" id="popupMessage">
+    <div class="popup-box">
+      <h3 id="popupTitle">✅ Registration Successful!</h3>
+      <p id="popupText">Please check your email for the OTP verification code.</p>
+    </div>
+  </div>
+  
+  <script src="js/signup.js" defer></script>
+</body>
+</html>
